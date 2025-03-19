@@ -1,19 +1,27 @@
-import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React from "react";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
-  { time: '00:00', consumption: 2.1, production: 0 },
-  { time: '02:00', consumption: 1.8, production: 0 },
-  { time: '04:00', consumption: 1.5, production: 0 },
-  { time: '06:00', consumption: 2.3, production: 0.2 },
-  { time: '08:00', consumption: 3.8, production: 1.5 },
-  { time: '10:00', consumption: 3.2, production: 2.8 },
-  { time: '12:00', consumption: 2.9, production: 3.1 },
-  { time: '14:00', consumption: 2.7, production: 2.9 },
-  { time: '16:00', consumption: 3.1, production: 2.1 },
-  { time: '18:00', consumption: 4.2, production: 0.8 },
-  { time: '20:00', consumption: 3.9, production: 0 },
-  { time: '22:00', consumption: 2.8, production: 0 },
+  { time: "00:00", consumption: 2.1, production: 0 },
+  { time: "02:00", consumption: 1.8, production: 0 },
+  { time: "04:00", consumption: 1.5, production: 0 },
+  { time: "06:00", consumption: 2.3, production: 0.2 },
+  { time: "08:00", consumption: 3.8, production: 1.5 },
+  { time: "10:00", consumption: 3.2, production: 2.8 },
+  { time: "12:00", consumption: 2.9, production: 3.1 },
+  { time: "14:00", consumption: 2.7, production: 2.9 },
+  { time: "16:00", consumption: 3.1, production: 2.1 },
+  { time: "18:00", consumption: 4.2, production: 0.8 },
+  { time: "20:00", consumption: 3.9, production: 0 },
+  { time: "22:00", consumption: 2.8, production: 0 },
 ];
 
 export const ConsumptionChart: React.FC = () => {

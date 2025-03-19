@@ -14,6 +14,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@components": path.resolve(__dirname, "./src/components"),
+      "@mui/styled-engine": "@mui/styled-engine-sc",
     },
   },
   css: {
@@ -22,5 +23,8 @@ export default defineConfig({
         api: "modern-compiler",
       },
     },
+  },
+  define: {
+    __APP_ENV__: process.env.VITE_VERCEL_ENV,
   },
 });
