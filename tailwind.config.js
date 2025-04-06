@@ -21,6 +21,9 @@ export default {
           950: '#082f49',
         },
       },
+      borderWidth:{
+        1:'1px'
+      }
     },
   },
   plugins: [],

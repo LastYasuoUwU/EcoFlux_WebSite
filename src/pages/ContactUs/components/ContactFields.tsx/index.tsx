@@ -1,7 +1,6 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { LucideSend } from "lucide-react";
 import { enqueueSnackbar, VariantType } from "notistack";
-import React from "react";
 
 export default function ContactFields() {
   const handleClickVariant = (variant: VariantType) => () => {
