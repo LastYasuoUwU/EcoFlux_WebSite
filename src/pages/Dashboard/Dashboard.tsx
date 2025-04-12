@@ -4,18 +4,17 @@ import Consumption from "./Consumptions";
 import Analytics from "./Analytics";
 import Reports from "./Reports";
 import Settings from "./Settings";
-import PageUnderConstruction from "../PageUnderCosntruction";
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
 
   // Navigation items configuration
   const navItems = [
-    { id: "dashboard", label: "Dashboard", component: DashboardPage },
-    { id: "consumption", label: "Consumption", component: Consumption },
-    { id: "analytics", label: "Analytics", component: Analytics },
-    { id: "reports", label: "Reports", component: PageUnderConstruction },
-    { id: "settings", label: "Settings", component: PageUnderConstruction },
+    { id: "dashboard", label: "Tableau du board", component: DashboardPage },
+    { id: "consumption", label: "Consommation", component: Consumption },
+    { id: "analytics", label: "Analyses", component: Analytics },
+    { id: "reports", label: "Rapports", component: Reports },
+    { id: "settings", label: "Paramètres", component: Settings },
   ];
 
   // Get the active component based on the selected tab
@@ -24,12 +23,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
-        <div className="p-8">
-          <header className="mb-8">
-            <h2 className="text-2xl font-bold">Tableau de bord</h2>
-            <p className="">Vue d'ensemble de votre consommation énergétique</p>
-          </header>
-
+        <div className="">
           {/* Device Summary */}
           <div className="border-b">
             <div className="container mx-auto px-4 py-3">
@@ -45,7 +39,7 @@ const Dashboard: React.FC = () => {
                 </div>
                 <div className="mt-2 md:mt-0 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
                   <div className="flex items-center">
-                    <span className="text-gray-500">Serial:</span>
+                    <span className="text-gray-500">Serie:</span>
                     <span className="ml-2 font-medium">PM51-22871</span>
                   </div>
                   <div className="flex items-center">
@@ -59,7 +53,7 @@ const Dashboard: React.FC = () => {
                     </span>
                   </div>
                   <div className="flex items-center">
-                    <span className="text-gray-500">Last Update:</span>
+                    <span className="text-gray-500">dernier mise à jour:</span>
                     <span className="ml-2 font-medium">Just now</span>
                   </div>
                 </div>
@@ -94,13 +88,6 @@ const Dashboard: React.FC = () => {
           </main>
         </div>
       </div>
-
-      {/* Simplified Footer - Now sticks to the bottom
-      <footer className="bg-gray-800 text-gray-300 py-4 mt-auto">
-        <div className="container mx-auto px-4 text-center">
-          <p>Made by FADWA BOUKACHABA</p>
-        </div>
-      </footer> */}
     </div>
   );
 };

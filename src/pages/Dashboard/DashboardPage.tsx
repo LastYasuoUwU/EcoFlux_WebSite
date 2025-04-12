@@ -151,7 +151,7 @@ export default function DashboardPage() {
           <Zap size={64} />
         </div>
         <h2 className="mt-4 text-xl font-semibold text-gray-700">
-          Loading PowerLogic™ PM5100 Data...
+          chargement PowerLogic™ PM5100 Data...
         </h2>
       </div>
     );
@@ -163,7 +163,9 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Current Power</h3>
+            <h3 className="text-gray-500 text-sm font-medium">
+              Puissance actuelle
+            </h3>
             <div className="p-2 bg-blue-100 rounded-lg">
               <Zap size={20} className="text-blue-600" />
             </div>
@@ -175,18 +177,20 @@ export default function DashboardPage() {
               </p>
               <p className="text-lg ml-2 text-gray-600">kW</p>
             </div>
-            <p className="text-sm text-gray-500 mt-1">Real-time consumption</p>
+            <p className="text-sm text-gray-500 mt-1">
+              Consommation en temps réel
+            </p>
           </div>
           <div className="mt-4 flex items-center text-sm">
             <ArrowDownCircle size={16} className="text-green-500 mr-1" />
-            <span className="text-green-500 font-medium">12% lower</span>
-            <span className="text-gray-500 ml-1">than yesterday</span>
+            <span className="text-green-500 font-medium">12% moins</span>
+            <span className="text-gray-500 ml-1">qu'hier</span>
           </div>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Voltage</h3>
+            <h3 className="text-gray-500 text-sm font-medium">Tention</h3>
             <div className="p-2 bg-amber-100 rounded-lg">
               <BatteryCharging size={20} className="text-amber-600" />
             </div>
@@ -198,7 +202,7 @@ export default function DashboardPage() {
               </p>
               <p className="text-lg ml-2 text-gray-600">V</p>
             </div>
-            <p className="text-sm text-gray-500 mt-1">AC Voltage Level</p>
+            <p className="text-sm text-gray-500 mt-1">Niveau de tension CA</p>
           </div>
           <div className="mt-4 flex items-center text-sm">
             <div className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
@@ -209,7 +213,7 @@ export default function DashboardPage() {
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Current</h3>
+            <h3 className="text-gray-500 text-sm font-medium">Courant</h3>
             <div className="p-2 bg-indigo-100 rounded-lg">
               <Battery size={20} className="text-indigo-600" />
             </div>
@@ -221,11 +225,11 @@ export default function DashboardPage() {
               </p>
               <p className="text-lg ml-2 text-gray-600">A</p>
             </div>
-            <p className="text-sm text-gray-500 mt-1">Current Flow</p>
+            <p className="text-sm text-gray-500 mt-1">Flux de courant</p>
           </div>
           <div className="mt-4 flex items-center text-sm">
             <div className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">
-              Peak Hours
+              heures de pointe
             </div>
           </div>
         </div>
@@ -234,10 +238,10 @@ export default function DashboardPage() {
       {/* Real-time chart */}
       <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
         <h3 className="text-lg font-medium text-gray-800 mb-4">
-          Real-time Power Consumption
+          Consommation d’énergie en temps réel
         </h3>
         <p className="text-sm text-gray-500 mb-4">
-          Live data updated every 5 seconds
+          Données en direct mises à jour toutes les 5 secondes
         </p>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -272,7 +276,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            24-Hour Power Consumption
+            Consommation d’énergie 24 heures
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -300,7 +304,7 @@ export default function DashboardPage() {
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Monthly Consumption
+            Consommation mensuelle
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -328,7 +332,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-2">
-            Daily Overview
+            Aperçu quotidien
           </h3>
           <div className="flex items-center justify-between mt-4">
             <div>
@@ -348,7 +352,7 @@ export default function DashboardPage() {
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-2">
-            Monthly Cost
+            Coût mensuel
           </h3>
           <div className="flex items-center mt-4">
             <DollarSign size={28} className="text-green-600 mr-2" />
@@ -356,7 +360,7 @@ export default function DashboardPage() {
           </div>
           <div className="mt-2">
             <div className="flex justify-between text-sm text-gray-500">
-              <span>Projected savings</span>
+              <span>Économies prévues</span>
               <span className="text-green-600 font-medium">$12.45</span>
             </div>
           </div>
@@ -364,11 +368,13 @@ export default function DashboardPage() {
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-2">
-            Power Quality
+            Qualité de puissance
           </h3>
           <div className="mt-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-500">Power Factor</span>
+              <span className="text-sm text-gray-500">
+                Facteur de puissance
+              </span>
               <span className="text-sm font-medium text-gray-800">0.92</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">

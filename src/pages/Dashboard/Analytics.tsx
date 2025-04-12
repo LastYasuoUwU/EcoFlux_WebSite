@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -39,7 +37,7 @@ const generateAnalyticsData = (days = 30) => {
     const hasAnomaly = Math.random() > 0.9; // 10% chance for anomaly
 
     data.push({
-      date: date.toLocaleDateString("en-US", {
+      date: date.toLocaleDateString("fr-FR", {
         month: "short",
         day: "numeric",
       }),
@@ -50,8 +48,8 @@ const generateAnalyticsData = (days = 30) => {
       anomaly: hasAnomaly ? 1 : 0,
       anomalyType: hasAnomaly
         ? Math.random() > 0.5
-          ? "Voltage Sag"
-          : "Harmonic Distortion"
+          ? "Chute de tension"
+          : "Distorsion harmonique"
         : null,
     });
   }
@@ -138,7 +136,9 @@ export default function Analytics() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="spinner h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <span className="ml-3 text-gray-700">Loading analytics data...</span>
+        <span className="ml-3 text-gray-700">
+          Chargement des données d'analyse...
+        </span>
       </div>
     );
   }
@@ -149,10 +149,10 @@ export default function Analytics() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-xl shadow-sm mb-6">
         <div>
           <h2 className="text-xl font-semibold text-gray-800">
-            Power Quality Analytics
+            Analyse de la Qualité d'Énergie
           </h2>
           <p className="text-sm text-gray-500 mt-1">
-            Monitor and analyze power quality metrics
+            Surveillance et analyse des indicateurs de qualité d'énergie
           </p>
         </div>
 
@@ -162,25 +162,25 @@ export default function Analytics() {
               onClick={() => setTimeRange("7d")}
               className={`px-3 py-1 text-sm rounded-lg ${timeRange === "7d" ? "bg-blue-600 text-white" : "text-gray-600"}`}
             >
-              Week
+              Semaine
             </button>
             <button
               onClick={() => setTimeRange("30d")}
               className={`px-3 py-1 text-sm rounded-lg ${timeRange === "30d" ? "bg-blue-600 text-white" : "text-gray-600"}`}
             >
-              Month
+              Mois
             </button>
             <button
               onClick={() => setTimeRange("90d")}
               className={`px-3 py-1 text-sm rounded-lg ${timeRange === "90d" ? "bg-blue-600 text-white" : "text-gray-600"}`}
             >
-              Quarter
+              Trimestre
             </button>
           </div>
 
           <div className="flex items-center bg-gray-100 rounded-lg px-3 py-1">
             <Calendar size={16} className="text-gray-500 mr-2" />
-            <span className="text-sm text-gray-700">Custom Range</span>
+            <span className="text-sm text-gray-700">Période personnalisée</span>
           </div>
 
           <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg">
@@ -193,7 +193,9 @@ export default function Analytics() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
         <div className="bg-white p-4 rounded-xl shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500">Power Factor</h3>
+            <h3 className="text-sm font-medium text-gray-500">
+              Facteur de puissance
+            </h3>
             <TrendingUp size={18} className="text-green-600" />
           </div>
           <p className="mt-2 text-2xl font-bold text-gray-800">
@@ -209,8 +211,8 @@ export default function Analytics() {
             {Number(avgPowerFactor) > 0.9
               ? "Excellent"
               : Number(avgPowerFactor) > 0.85
-                ? "Good"
-                : "Needs improvement"}
+                ? "Bon"
+                : "Amélioration nécessaire"}
           </p>
         </div>
 
@@ -228,16 +230,16 @@ export default function Analytics() {
           </div>
           <p className="mt-1 text-xs text-gray-500">
             {Number(avgTHD) < 3
-              ? "Low distortion"
+              ? "Faible distorsion"
               : Number(avgTHD) < 5
-                ? "Moderate"
-                : "High distortion"}
+                ? "Modérée"
+                : "Forte distorsion"}
           </p>
         </div>
 
         <div className="bg-white p-4 rounded-xl shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500">Voltage</h3>
+            <h3 className="text-sm font-medium text-gray-500">Tension</h3>
             <Battery size={18} className="text-blue-600" />
           </div>
           <p className="mt-2 text-2xl font-bold text-gray-800">{avgVoltage}V</p>
@@ -249,10 +251,10 @@ export default function Analytics() {
           </div>
           <p className="mt-1 text-xs text-gray-500">
             {Math.abs(Number(avgVoltage) - 230) < 5
-              ? "Normal range"
+              ? "Plage normale"
               : Math.abs(Number(avgVoltage) - 230) < 10
-                ? "Minor variation"
-                : "Out of range"}
+                ? "Légère variation"
+                : "Hors plage"}
           </p>
         </div>
 
@@ -272,8 +274,8 @@ export default function Analytics() {
           </div>
           <p className="mt-1 text-xs text-gray-500">
             {totalAnomalies === 0
-              ? "No issues detected"
-              : `Detected in last ${timeRange}`}
+              ? "Aucun problème détecté"
+              : `Détectées ces ${timeRange === "7d" ? "7 jours" : timeRange === "30d" ? "30 jours" : "90 jours"}`}
           </p>
         </div>
       </div>
@@ -282,7 +284,7 @@ export default function Analytics() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Power Factor & THD Trends
+            Tendances du facteur de puissance et THD
           </h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -310,7 +312,7 @@ export default function Analytics() {
                 <Legend />
                 <Line
                   yAxisId="left"
-                  name="Power Factor"
+                  name="Facteur de puissance"
                   type="monotone"
                   dataKey="powerFactor"
                   stroke="#3b82f6"
@@ -343,7 +345,7 @@ export default function Analytics() {
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Voltage & Current Analysis
+            Analyse de tension et courant
           </h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -379,7 +381,7 @@ export default function Analytics() {
                 <Legend />
                 <Line
                   yAxisId="left"
-                  name="Voltage (V)"
+                  name="Tension (V)"
                   type="monotone"
                   dataKey="voltage"
                   stroke="#3b82f6"
@@ -389,7 +391,7 @@ export default function Analytics() {
                 />
                 <Line
                   yAxisId="right"
-                  name="Current (A)"
+                  name="Courant (A)"
                   type="monotone"
                   dataKey="current"
                   stroke="#10b981"
@@ -399,7 +401,7 @@ export default function Analytics() {
                 />
                 <Line
                   yAxisId="right"
-                  name="Harmonics (%)"
+                  name="Harmoniques (%)"
                   type="monotone"
                   dataKey="harmonics"
                   stroke="#f59e0b"
@@ -417,7 +419,7 @@ export default function Analytics() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Frequency Variation
+            Variation de fréquence
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -430,7 +432,7 @@ export default function Analytics() {
                 <YAxis domain={[49.5, 50.5]} stroke="#9ca3af" fontSize={12} />
                 <Tooltip contentStyle={{ borderRadius: "8px" }} />
                 <Line
-                  name="Frequency (Hz)"
+                  name="Fréquence (Hz)"
                   type="monotone"
                   dataKey="frequency"
                   stroke="#6366f1"
@@ -438,7 +440,7 @@ export default function Analytics() {
                   dot={false}
                 />
                 <Line
-                  name="Target"
+                  name="Cible"
                   type="monotone"
                   strokeDasharray="5 5"
                   stroke="#9ca3af"
@@ -456,7 +458,7 @@ export default function Analytics() {
 
         <div className="bg-white p-6 rounded-xl shadow-sm lg:col-span-2">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Detected Anomalies
+            Anomalies détectées
           </h3>
           {anomalies.length > 0 ? (
             <div className="overflow-x-auto">
@@ -470,16 +472,16 @@ export default function Analytics() {
                       Type
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Voltage
+                      Tension
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Power Factor
+                      Facteur de puissance
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       THD
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Severity
+                      Sévérité
                     </th>
                   </tr>
                 </thead>
@@ -510,8 +512,8 @@ export default function Analytics() {
                           }`}
                         >
                           {anomaly.thd > 4 || anomaly.powerFactor < 0.85
-                            ? "High"
-                            : "Medium"}
+                            ? "Élevée"
+                            : "Moyenne"}
                         </span>
                       </td>
                     </tr>
@@ -523,10 +525,10 @@ export default function Analytics() {
             <div className="flex flex-col items-center justify-center h-64 text-center">
               <Zap size={48} className="text-gray-300 mb-4" />
               <p className="text-gray-500">
-                No anomalies detected in the selected time range
+                Aucune anomalie détectée dans la période sélectionnée
               </p>
               <p className="text-sm text-gray-400 mt-2">
-                Power quality is within acceptable parameters
+                La qualité d'énergie est dans les paramètres acceptables
               </p>
             </div>
           )}
@@ -536,19 +538,20 @@ export default function Analytics() {
       {/* Recommendations and Insights */}
       <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
         <h3 className="text-lg font-medium text-gray-800 mb-4">
-          Recommendations & Insights
+          Recommandations et analyses
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {avgPowerFactor < 0.9 && (
             <div className="border border-amber-200 bg-amber-50 p-4 rounded-lg">
               <h4 className="font-medium text-amber-800">
-                Power Factor Improvement
+                Amélioration du facteur de puissance
               </h4>
               <p className="text-sm text-amber-700 mt-1">
-                Consider installing power factor correction capacitors to
-                improve power factor from {avgPowerFactor} to above 0.95. This
-                could reduce electricity bills by approximately 3-5%.
+                Envisagez d'installer des condensateurs de correction du facteur
+                de puissance pour améliorer le facteur de puissance de{" "}
+                {avgPowerFactor} à plus de 0,95. Cela pourrait réduire les
+                factures d'électricité d'environ 3-5%.
               </p>
             </div>
           )}
@@ -556,23 +559,25 @@ export default function Analytics() {
           {avgTHD > 3 && (
             <div className="border border-red-200 bg-red-50 p-4 rounded-lg">
               <h4 className="font-medium text-red-800">
-                Harmonic Filtering Required
+                Filtrage harmonique nécessaire
               </h4>
               <p className="text-sm text-red-700 mt-1">
-                THD of {avgTHD}% exceeds recommended limits. Consider installing
-                harmonic filters to protect sensitive equipment and reduce
-                energy losses.
+                THD de {avgTHD}% dépasse les limites recommandées. Envisagez
+                d'installer des filtres harmoniques pour protéger les
+                équipements sensibles et réduire les pertes d'énergie.
               </p>
             </div>
           )}
 
           {Math.abs(Number(avgVoltage) - 230) > 5 && (
             <div className="border border-amber-200 bg-amber-50 p-4 rounded-lg">
-              <h4 className="font-medium text-amber-800">Voltage Regulation</h4>
+              <h4 className="font-medium text-amber-800">
+                Régulation de tension
+              </h4>
               <p className="text-sm text-amber-700 mt-1">
-                Your average voltage of {avgVoltage}V deviates from the nominal
-                230V. Consider installing a voltage stabilizer to protect
-                equipment and improve efficiency.
+                Votre tension moyenne de {avgVoltage}V s'écarte de la tension
+                nominale de 230V. Envisagez d'installer un stabilisateur de
+                tension pour protéger les équipements et améliorer l'efficacité.
               </p>
             </div>
           )}
@@ -580,12 +585,13 @@ export default function Analytics() {
           {totalAnomalies > 3 && (
             <div className="border border-red-200 bg-red-50 p-4 rounded-lg">
               <h4 className="font-medium text-red-800">
-                Schedule Power Quality Audit
+                Planifier un audit de qualité d'énergie
               </h4>
               <p className="text-sm text-red-700 mt-1">
-                Multiple power quality events detected ({totalAnomalies}{" "}
-                events). We recommend scheduling a comprehensive power quality
-                audit to identify and address root causes.
+                Plusieurs événements de qualité d'énergie détectés (
+                {totalAnomalies} événements). Nous recommandons de planifier un
+                audit complet de la qualité d'énergie pour identifier et
+                résoudre les causes profondes.
               </p>
             </div>
           )}
@@ -596,12 +602,13 @@ export default function Analytics() {
             totalAnomalies <= 3 && (
               <div className="border border-green-200 bg-green-50 p-4 rounded-lg col-span-2">
                 <h4 className="font-medium text-green-800">
-                  Power Quality Within Parameters
+                  Qualité d'énergie dans les paramètres
                 </h4>
                 <p className="text-sm text-green-700 mt-1">
-                  All power quality metrics are within acceptable parameters.
-                  Continue monitoring to maintain optimal performance and energy
-                  efficiency.
+                  Tous les indicateurs de qualité d'énergie sont dans les
+                  paramètres acceptables. Continuez la surveillance pour
+                  maintenir des performances optimales et une efficacité
+                  énergétique.
                 </p>
               </div>
             )}

@@ -17,20 +17,13 @@ export default function PageUnderConstruction() {
         </div>
         <div className="flex flex-col gap-4">
           <Typography variant="h4" color="error">
-            Page is under construction
+            Page est en cours de construction
           </Typography>
           <Button variant="contained" color="error" onClick={onClickHandler}>
-            Back to Dashboard
+            Retour au tableau du board
           </Button>
         </div>
       </div>
-
-      {/* Footer that sticks to the bottom
-      <footer className="bg-gray-800 text-gray-300 py-4 mt-auto">
-        <div className="container mx-auto px-4 text-center">
-          <p>Made by FADWA BOUKACHABA</p>
-        </div>
-      </footer> */}
     </div>
   );
 }

@@ -31,13 +31,13 @@ const generateHourlyData = () => {
 
 const generateWeeklyData = () => {
   const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+    "Dimanche",
   ];
   return days.map((day) => ({
     day,
@@ -64,9 +64,9 @@ const generateMonthlyData = () => {
 const generateDistributionData = () => {
   return [
     { name: "HVAC", value: 40 },
-    { name: "Lighting", value: 20 },
-    { name: "Equipment", value: 25 },
-    { name: "Other", value: 15 },
+    { name: "Éclairage", value: 20 },
+    { name: "Équipment", value: 25 },
+    { name: "Autres", value: 15 },
   ];
 };
 
@@ -75,7 +75,7 @@ export default function Consumption() {
   const [chartData, setChartData] = useState([]);
   const [distributionData, setDistributionData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [dateRange, setDateRange] = useState("Last 7 days");
+  const [dateRange, setDateRange] = useState("dernier 7 jours");
   const [compareMode, setCompareMode] = useState(false);
 
   const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#6366f1"];
@@ -137,12 +137,15 @@ export default function Consumption() {
               <YAxis stroke="#9ca3af" fontSize={12} unit="kW" />
               <Tooltip
                 contentStyle={{ borderRadius: "8px" }}
-                formatter={(value) => [`${value.toFixed(2)} kW`, "Consumption"]}
+                formatter={(value) => [
+                  `${value.toFixed(2)} kW`,
+                  "Consommation",
+                ]}
                 labelFormatter={(hour) => `${hour}:00`}
               />
               <Legend />
               <Line
-                name="Power Consumption"
+                name="Consommation d'énergie"
                 type="monotone"
                 dataKey="consumption"
                 stroke="#3b82f6"
@@ -151,7 +154,7 @@ export default function Consumption() {
               />
               {compareMode && (
                 <Line
-                  name="Previous Period"
+                  name="Période précédente"
                   type="monotone"
                   dataKey="demand"
                   stroke="#f59e0b"
@@ -177,14 +180,14 @@ export default function Consumption() {
               <Tooltip contentStyle={{ borderRadius: "8px" }} />
               <Legend />
               <Bar
-                name="Energy Consumption"
+                name="Consommation d'énergie"
                 dataKey="consumption"
                 fill="#3b82f6"
                 radius={[4, 4, 0, 0]}
               />
               {compareMode && (
                 <Bar
-                  name="Peak Demand"
+                  name="Demande de pointe"
                   dataKey="peak"
                   fill="#f59e0b"
                   radius={[4, 4, 0, 0]}
@@ -223,7 +226,7 @@ export default function Consumption() {
               <Legend />
               <Line
                 yAxisId="left"
-                name="Energy Consumption"
+                name="Consommation d'énergie"
                 type="monotone"
                 dataKey="consumption"
                 stroke="#3b82f6"
@@ -234,7 +237,7 @@ export default function Consumption() {
               {compareMode && (
                 <Line
                   yAxisId="right"
-                  name="Energy Cost"
+                  name="Coût énergétique"
                   type="monotone"
                   dataKey="cost"
                   stroke="#f59e0b"
@@ -248,7 +251,11 @@ export default function Consumption() {
         );
 
       default:
-        return <p>Select a timeframe to view consumption data</p>;
+        return (
+          <p>
+            Sélectionnez une période pour afficher les données de consommation
+          </p>
+        );
     }
   };
 
@@ -256,7 +263,9 @@ export default function Consumption() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="spinner h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <span className="ml-3 text-gray-700">Loading consumption data...</span>
+        <span className="ml-3 text-gray-700">
+          Chargement des données de consommation...
+        </span>
       </div>
     );
   }
@@ -267,35 +276,38 @@ export default function Consumption() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-4 rounded-xl shadow-sm mb-6">
         <div className="flex items-center space-x-4 mb-4 md:mb-0">
           <h2 className="text-xl font-semibold text-gray-800">
-            Energy Consumption
+            Consommation d'énergie
           </h2>
           <div className="flex bg-gray-100 rounded-lg">
             <button
               onClick={() => setTimeframe("daily")}
               className={`px-3 py-1 text-sm rounded-lg ${timeframe === "daily" ? "bg-blue-600 text-white" : "text-gray-600"}`}
             >
-              Daily
+              Quotidien
             </button>
             <button
               onClick={() => setTimeframe("weekly")}
               className={`px-3 py-1 text-sm rounded-lg ${timeframe === "weekly" ? "bg-blue-600 text-white" : "text-gray-600"}`}
             >
-              Weekly
+              Hebdomadaire
             </button>
             <button
               onClick={() => setTimeframe("monthly")}
               className={`px-3 py-1 text-sm rounded-lg ${timeframe === "monthly" ? "bg-blue-600 text-white" : "text-gray-600"}`}
             >
-              Monthly
+              Mensuel
             </button>
           </div>
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="flex items-center bg-gray-100 rounded-lg px-3 py-1">
+          <button
+            className="flex items-center bg-gray-100 rounded-lg px-3 py-1"
+            disabled
+          >
             <Calendar size={16} className="text-gray-500 mr-2" />
             <span className="text-sm text-gray-700">{dateRange}</span>
-          </div>
+          </button>
 
           <button
             onClick={() => setCompareMode(!compareMode)}
@@ -305,14 +317,20 @@ export default function Consumption() {
                 : "bg-white border-gray-300 text-gray-600"
             }`}
           >
-            Compare
+            Comparer
           </button>
 
-          <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg">
+          <button
+            className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
+            disabled
+          >
             <Download size={18} />
           </button>
 
-          <button className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg">
+          <button
+            className="p-2 text-gray-500 hover:bg-gray-100 rounded-lg"
+            disabled
+          >
             <Filter size={18} />
           </button>
         </div>
@@ -325,7 +343,7 @@ export default function Consumption() {
             <ArrowDown size={24} className="text-blue-600" />
           </div>
           <div className="ml-4">
-            <p className="text-sm text-gray-500">Total Consumption</p>
+            <p className="text-sm text-gray-500">Consommation total</p>
             <div className="flex items-end">
               <p className="text-2xl font-bold text-gray-800">
                 {totalConsumption}
@@ -346,7 +364,7 @@ export default function Consumption() {
             <ArrowUp size={24} className="text-green-600" />
           </div>
           <div className="ml-4">
-            <p className="text-sm text-gray-500">Peak Consumption</p>
+            <p className="text-sm text-gray-500">Pointe de consommation</p>
             <div className="flex items-end">
               <p className="text-2xl font-bold text-gray-800">
                 {peakConsumption}
@@ -363,7 +381,7 @@ export default function Consumption() {
             <Filter size={24} className="text-indigo-600" />
           </div>
           <div className="ml-4">
-            <p className="text-sm text-gray-500">Average Consumption</p>
+            <p className="text-sm text-gray-500">Consommation moyenne</p>
             <div className="flex items-end">
               <p className="text-2xl font-bold text-gray-800">
                 {averageConsumption}
@@ -380,19 +398,19 @@ export default function Consumption() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="bg-white p-6 rounded-xl shadow-sm lg:col-span-2">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
+            Consommation{" "}
             {timeframe === "daily"
-              ? "Hourly"
+              ? "horaire"
               : timeframe === "weekly"
-                ? "Daily"
-                : "Monthly"}{" "}
-            Consumption
+                ? "quotidienne"
+                : "mensuel"}
           </h3>
           <div className="h-80">{renderTimeframeChart()}</div>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm">
           <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Consumption Distribution
+            Répartition de la consommation
           </h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -427,25 +445,17 @@ export default function Consumption() {
       {/* Recommendations */}
       <div className="bg-white p-6 rounded-xl shadow-sm">
         <h3 className="text-lg font-medium text-gray-800 mb-4">
-          Optimization Recommendations
+          Recommandations d'optimisation
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="border border-green-200 bg-green-50 p-4 rounded-lg">
-            <h4 className="font-medium text-green-800">
-              Peak Shaving Opportunity
-            </h4>
-            <p className="text-sm text-green-700 mt-1">
-              Shifting 20% of your consumption from peak hours (9AM-12PM) could
-              save approximately $120 monthly.
-            </p>
-          </div>
           <div className="border border-blue-200 bg-blue-50 p-4 rounded-lg">
             <h4 className="font-medium text-blue-800">
-              Power Factor Improvement
+              Amélioration du facteur de puissance
             </h4>
             <p className="text-sm text-blue-700 mt-1">
-              Improving power factor from 0.92 to 0.98 could eliminate power
-              factor penalties and improve efficiency.
+              L’amélioration du facteur de puissance de 0,92 à 0,98 pourrait
+              éliminer les pénalités liées au facteur de puissance et améliorer
+              le rendement.
             </p>
           </div>
         </div>
