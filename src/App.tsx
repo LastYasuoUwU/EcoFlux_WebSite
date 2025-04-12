@@ -8,7 +8,7 @@ import { SnackbarProvider } from "notistack";
 const NAVIGATION: Navigation = [
   {
     segment: "dashboard",
-    title: "Dashboard",
+    title: "Tableau du board",
     icon: <Home />,
   },
   {
@@ -23,7 +23,7 @@ const NAVIGATION: Navigation = [
   },
   {
     segment: "about",
-    title: "About us",
+    title: "Qui nous?",
     icon: <Users />,
   },
 ];
