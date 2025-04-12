@@ -1,67 +1,108 @@
-import React from "react";
-import { StatCard } from "./components/StatCard";
-import { ConsumptionChart } from "./components/ConsumptionChart";
-import { InfoCard } from "./components/InfoCard";
-import { DeviceList } from "./components/DeviceList";
-import { version } from "../../../package.json";
+import React, { useState } from "react";
+import DashboardPage from "./DashboardPage";
+import Consumption from "./Consumptions";
+import Analytics from "./Analytics";
+import Reports from "./Reports";
+import Settings from "./Settings";
+import PageUnderConstruction from "../PageUnderCosntruction";
 
-export const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("dashboard");
+
+  // Navigation items configuration
+  const navItems = [
+    { id: "dashboard", label: "Dashboard", component: DashboardPage },
+    { id: "consumption", label: "Consumption", component: Consumption },
+    { id: "analytics", label: "Analytics", component: Analytics },
+    { id: "reports", label: "Reports", component: PageUnderConstruction },
+    { id: "settings", label: "Settings", component: PageUnderConstruction },
+  ];
+
+  // Get the active component based on the selected tab
+  const ActiveComponent =
+    navItems.find((item) => item.id === activeTab)?.component || Dashboard;
   return (
-    <div className="flex flex-col items-center">
-      <div className="p-8">
-        <header className="mb-8">
-          <h2 className="text-2xl font-bold ">Tableau de bord</h2>
-          <p className="">Vue d'ensemble de votre consommation énergétique</p>
-        </header>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
+        <div className="p-8">
+          <header className="mb-8">
+            <h2 className="text-2xl font-bold">Tableau de bord</h2>
+            <p className="">Vue d'ensemble de votre consommation énergétique</p>
+          </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <StatCard
-            title="Consommation Actuelle"
-            value="3.2 kW"
-            trend="-12%"
-            positive
-          />
-          <StatCard
-            title="Consommation Journalière"
-            value="24.7 kWh"
-            trend="+5%"
-            positive={false}
-          />
-          <StatCard
-            title="Production Solaire"
-            value="2.8 kW"
-            trend="+25%"
-            positive
-          />
+          {/* Device Summary */}
+          <div className="border-b">
+            <div className="container mx-auto px-4 py-3">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div className="mr-4">
+                  <h2 className="text-lg font-medium">
+                    PowerLogic™ PM5100 - Model EAV15105-FR11
+                  </h2>
+                  <p className="text-sm text-wrap">
+                    Compteur de puissance avancé avec des capacités de
+                    surveillance et de mesure de haute précision
+                  </p>
+                </div>
+                <div className="mt-2 md:mt-0 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
+                  <div className="flex items-center">
+                    <span className="text-gray-500">Serial:</span>
+                    <span className="ml-2 font-medium">PM51-22871</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-gray-500">Firmware:</span>
+                    <span className="ml-2 font-medium">v3.2.1</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-gray-500">Status:</span>
+                    <span className="ml-2 font-medium text-green-600">
+                      Online
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-gray-500">Last Update:</span>
+                    <span className="ml-2 font-medium">Just now</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <nav className="shadow-sm">
+            <div className="container mx-auto px-4">
+              <div className="flex space-x-6 overflow-x-auto">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    className={`py-4 px-2 font-medium flex items-center border-b-2 ${
+                      activeTab === item.id
+                        ? "border-blue-600 text-blue-600"
+                        : "border-transparent text-gray-500 hover:text-blue-600"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </nav>
+
+          {/* Main Content - Renders the active component */}
+          <main className="container mx-auto px-4 py-8">
+            <ActiveComponent />
+          </main>
         </div>
+      </div>
 
-        <section className="rounded-lg shadow-md p-6 mb-8">
-          <h3 className="text-lg font-semibold mb-4">
-            Consommation en Temps Réel
-          </h3>
-          <ConsumptionChart />
-        </section>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <InfoCard
-            title="Conseils d'Économie"
-            content="Optimisez votre consommation en programmant votre chauffage selon vos horaires de présence. Nous avons détecté une surconsommation possible entre 18h et 20h."
-          />
-          <InfoCard
-            title="Alertes Écowatt"
-            content="Aucune alerte pour aujourd'hui. La consommation nationale est stable. Prévision pour demain : consommation modérée (vert)."
-          />
+      {/* Simplified Footer - Now sticks to the bottom
+      <footer className="bg-gray-800 text-gray-300 py-4 mt-auto">
+        <div className="container mx-auto px-4 text-center">
+          <p>Made by FADWA BOUKACHABA</p>
         </div>
-
-        <section className="rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-semibold mb-4">Appareils Connectés</h3>
-          <DeviceList />
-        </section>
-      </div>
-      <div>
-        &copy;copyright <span className="text-bold">FADWA BOUKACHABA</span> 2025
-        - projet version {version}
-      </div>
+      </footer> */}
     </div>
   );
 };
+
+export default Dashboard;

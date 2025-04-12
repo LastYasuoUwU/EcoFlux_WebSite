@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { AppProvider, type Navigation } from "@toolpad/core/AppProvider";
 import { createTheme } from "@mui/material/styles";
-import { Home, Users, Wrench, Zap } from "lucide-react";
+import { Bolt, Home, Users, Wrench, Zap } from "lucide-react";
 import { DashboardLayout } from "@toolpad/core";
 import { SnackbarProvider } from "notistack";
 
@@ -17,6 +17,11 @@ const NAVIGATION: Navigation = [
     icon: <Wrench />,
   },
   {
+    segment: "machines",
+    title: "Machines",
+    icon: <Bolt />,
+  },
+  {
     segment: "about",
     title: "About us",
     icon: <Users />,
@@ -30,7 +35,8 @@ const demoTheme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data-toolpad-color-scheme",
   },
-  colorSchemes: { light: true, dark: true },
+  //* if you want to ativate the dark mode
+  colorSchemes: { light: true, dark: false },
   breakpoints: {
     values: {
       xs: 0,
@@ -58,8 +64,13 @@ function App() {
       >
         <DashboardLayout>
           <Outlet />
-          {/* todo: add a footer component and remove it from all pages if exist */}
         </DashboardLayout>
+        {/* Simplified Footer - Now sticks to the bottom */}
+        <footer className="bg-gray-800 text-gray-300 py-4 mt-auto">
+          <div className="container mx-auto px-4 text-center">
+            <p>Made by FADWA BOUKACHABA</p>
+          </div>
+        </footer>
       </AppProvider>
     </SnackbarProvider>
   );
