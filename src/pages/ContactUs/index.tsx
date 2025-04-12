@@ -248,9 +248,6 @@ const AboutUs = () => {
                       </div>
                     </div>
                     <div className="p-8">
-                      <div className="uppercase tracking-wide text-sm text-indigo-600 font-semibold mb-1">
-                        Expert
-                      </div>
                       <h2 className="text-2xl font-bold text-gray-900 mb-2 hover:text-indigo-700 transition-colors">
                         {member.name}
                       </h2>
