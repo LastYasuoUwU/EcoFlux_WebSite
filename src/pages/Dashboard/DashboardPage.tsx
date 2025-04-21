@@ -159,6 +159,41 @@ export default function DashboardPage() {
 
   return (
     <>
+      {/* Device Summary */}
+      <div>
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 rounded-xl shadow-sm">
+            <div className="mr-4">
+              <h2 className="text-lg font-medium">
+                PowerLogic™ PM5100 - Model EAV15105-FR11
+              </h2>
+              <p className="text-sm text-wrap">
+                Compteur de puissance avancé avec des capacités de surveillance
+                et de mesure de haute précision
+              </p>
+            </div>
+            <div className="mt-2 md:mt-0 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
+              <div className="flex items-center">
+                <span className="text-gray-500">Serie:</span>
+                <span className="ml-2 font-medium">PM51-22871</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-gray-500">Firmware:</span>
+                <span className="ml-2 font-medium">v3.2.1</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-gray-500">Status:</span>
+                <span className="ml-2 font-medium text-green-600">Online</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-gray-500">dernier mise à jour:</span>
+                <span className="ml-2 font-medium">Just now</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm">

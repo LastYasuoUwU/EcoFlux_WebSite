@@ -25,7 +25,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { enqueueSnackbar } from "notistack";
-import { supabase } from "../../../supabaseClient";
+import { supabase } from "../../../../supabaseClient";
 
 export default function WorkshopTable() {
   const [workshops, setWorkshops] = useState([]);

@@ -38,7 +38,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { enqueueSnackbar } from "notistack";
 import { useForm, Controller } from "react-hook-form";
-import { supabase } from "../pages/supabaseClient";
+import { supabase } from "../supabaseClient";
 
 /**
  * Generic Data Table Component with CRUD operations
