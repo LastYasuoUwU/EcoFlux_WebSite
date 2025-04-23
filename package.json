@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/react-router": "^1.2.8",
     "@mui/icons-material": "^7.0.1",
+    "@mui/lab": "7.0.0-beta.11",
     "@mui/material": "^6.4.8",
     "@mui/styled-engine-sc": "^6.4.9",
     "@supabase/supabase-js": "^2.49.4",
