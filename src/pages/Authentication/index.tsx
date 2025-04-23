@@ -3,7 +3,7 @@ import { SignIn, SignUp } from "@clerk/react-router";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Button, Tab, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
-import background from '../../assets/background_1.jpeg'
+import background from '../../assets/background.png'
 
 export default function AuthenticationPage() {
   // const [value, setValue] = React.useState("signIn");
@@ -64,7 +64,13 @@ export default function AuthenticationPage() {
       <div className="w-3/4">
         <img src={background} alt='background' className="h-full" />
       </div>
-      <div className="w-1/4 flex flex-col justify-center items-center">
+      <div className="w-1/4 flex flex-col items-center gap-24 mt-32">
+
+        {/* logo */}
+        <div>
+          <img src='https://res.cloudinary.com/dbhv2ff2q/image/upload/v1745323540/just%20testing/eo6tub43wci8p2aabwcw.svg'  alt="logo image" width={150} height={150}/>
+        </div>
+
         <div className="w-3/4 border px-4 pt-2 pb-4 rounded-2xl">
 
           {/* username field */}
@@ -110,6 +116,8 @@ export default function AuthenticationPage() {
             </Button>
           </div>
         </div>
+
+        {/* footer */}
         <div className="absolute bottom-4">
           <Typography> Faite par Fadwa BOUKACHABA</Typography>
         </div>
