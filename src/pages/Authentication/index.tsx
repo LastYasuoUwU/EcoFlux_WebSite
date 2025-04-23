@@ -3,6 +3,7 @@ import { SignIn, SignUp } from "@clerk/react-router";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Button, Tab, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
+import background from '../../assets/background_1.jpeg'
 
 export default function AuthenticationPage() {
   // const [value, setValue] = React.useState("signIn");
@@ -59,42 +60,58 @@ export default function AuthenticationPage() {
     //     </TabPanel>
     //   </TabContext>
     // </Box>
-    <div className="flex h-dvh justify-center items-center">
-      <div className="w-1/4 border px-4 pt-2 pb-4 rounded-2xl">
-        <div>
-          <TextField
-            fullWidth
-            id={"username"}
-            label={"Nom d'utilisateur"}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            helperText={"Veuillez saisir votre nom d'utilisateur!"}
-            margin="normal"
-          />
+    <div className="flex h-dvh">
+      <div className="w-3/4">
+        <img src={background} alt='background' className="h-full" />
+      </div>
+      <div className="w-1/4 flex flex-col justify-center items-center">
+        <div className="w-3/4 border px-4 pt-2 pb-4 rounded-2xl">
+
+          {/* username field */}
+          <div>
+            <TextField
+              fullWidth
+              id={"username"}
+              label={"Nom d'utilisateur"}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              helperText={"Veuillez saisir votre nom d'utilisateur!"}
+              margin="normal"
+            />
+          </div>
+
+          {/* password field */}
+          <div>
+            <TextField
+              fullWidth
+              type="password"
+              id={"password"}
+              label={"Mot de passe"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              helperText={"Veuillez saisir votre mot de passe!"}
+              margin="normal"
+            />
+          </div>
+
+          {/* error label */}
+          <div>
+            <Typography textAlign="justify" color="error" variant="caption">
+              {errorCredentials}
+            </Typography>
+          </div>
+
+          {/* submit button */}
+          <div className="flex mt-2 items-center justify-center">
+            <Button variant="contained" onClick={onConfirmHandler}>
+              Se connecter
+            </Button>
+          </div>
         </div>
-        <div>
-          <TextField
-            fullWidth
-            type="password"
-            id={"password"}
-            label={"Mot de passe"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            helperText={"Veuillez saisir votre mot de passe!"}
-            margin="normal"
-          />
-        </div>
-        <div>
-          <Typography textAlign="justify" color="error" variant="caption">
-            {errorCredentials}
-          </Typography>
-        </div>
-        <div>
-          <Button variant="contained" onClick={onConfirmHandler}>
-            Se connecter
-          </Button>
+        <div className="absolute bottom-4">
+          <Typography> Faite par Fadwa BOUKACHABA</Typography>
         </div>
       </div>
     </div>

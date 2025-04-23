@@ -3,9 +3,9 @@ import DashboardPage from "./DashboardPage";
 import Consumption from "./Consumptions";
 import Analytics from "./Analytics";
 import Reports from "./Reports";
-import Settings from "./Settings";
 import WorkshopsManagement from "../Workshops";
 import MachinesPage from "../Machines";
+import AboutUs from "../AboutUs";
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
     { id: "machines", label: "Machines", component: MachinesPage },
     { id: "analytics", label: "Analyses", component: Analytics },
     { id: "reports", label: "Rapports", component: Reports },
-    { id: "settings", label: "Paramètres", component: Settings },
+    { id: "aboutUs", label: "Qui nous ?", component: AboutUs },
   ];
 
   // Get the active component based on the selected tab
