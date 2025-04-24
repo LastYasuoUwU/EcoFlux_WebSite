@@ -13,7 +13,7 @@ export default function AuthenticationPage() {
   const navigate = useNavigate();
 
   const onConfirmHandler = () => {
-    if (username === "" && password === "") {
+    if ((username === "" && password === "") || (username === "" || password === "")) {
       setErrorCredentials("Veuillez remplir les champs obligatoires!");
     } else if (username === "admin" && password === "admin") {
       navigate("/dashboard");
@@ -68,7 +68,7 @@ export default function AuthenticationPage() {
 
         {/* logo */}
         <div>
-          <img src='https://res.cloudinary.com/dbhv2ff2q/image/upload/v1745323540/just%20testing/eo6tub43wci8p2aabwcw.svg'  alt="logo image" width={150} height={150}/>
+          <img src='https://res.cloudinary.com/dbhv2ff2q/image/upload/v1745323540/just%20testing/eo6tub43wci8p2aabwcw.svg' alt="logo image" width={150} height={150} />
         </div>
 
         <div className="w-3/4 border px-4 pt-2 pb-4 rounded-2xl">
