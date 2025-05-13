@@ -390,13 +390,13 @@ export default function DashboardPage() {
             Coût mensuel
           </h3>
           <div className="flex items-center mt-4">
-            <DollarSign size={28} className="text-green-600 mr-2" />
-            <p className="text-3xl font-bold text-gray-800">${monthlyCost}</p>
+            {/* <DollarSign size={28} className="text-green-600 mr-2" /> */}
+            <p className="text-3xl font-bold text-gray-800">{monthlyCost} <span className="text-3xl font-bold text-green-600">MAD</span></p>
           </div>
           <div className="mt-2">
             <div className="flex justify-between text-sm text-gray-500">
               <span>Économies prévues</span>
-              <span className="text-green-600 font-medium">$12.45</span>
+              <span className="text-green-600 font-medium">12.45</span>
             </div>
           </div>
         </div>

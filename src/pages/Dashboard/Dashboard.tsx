@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import DashboardPage from "./DashboardPage";
-import Consumption from "../Consumption";
 import AboutUs from "../AboutUs";
 import MeasuringSystemPage from "../MeasuringSystem";
 import MachinesPage from "../Machines";
@@ -9,8 +8,7 @@ import AboutCompany from "../AboutCompany";
 
 // Navigation items configuration
 const navItems = [
-  { id: "dashboard", label: "Tableau du board", component: DashboardPage },
-  { id: "consumption", label: "Consommation", component: Consumption },
+  { id: "dashboard", label: "Tableau du bord", component: DashboardPage },
   {
     id: "zone",
     label: "Zone",

@@ -219,7 +219,7 @@ export default function Consumption() {
                   orientation="right"
                   stroke="#f59e0b"
                   fontSize={12}
-                  unit="$"
+                  unit="MAD"
                 />
               )}
               <Tooltip contentStyle={{ borderRadius: "8px" }} />
