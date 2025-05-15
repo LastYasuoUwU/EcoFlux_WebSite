@@ -72,9 +72,6 @@ const AboutUs = () => {
                         <p className="text-md font-medium text-blue-600 mb-1">
                           {member.role}
                         </p>
-                        <p className="text-md text-blue-500 mb-6 italic">
-                          {member.roleEn}
-                        </p>
                         <div className="absolute -left-4 top-0 bottom-0 w-1 bg-indigo-300 rounded"></div>
                       </div>
 

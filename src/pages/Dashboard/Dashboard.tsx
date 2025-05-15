@@ -22,10 +22,15 @@ const navItems = [
     label: "Système de mesure",
     component: MeasuringSystemPage,
   },
-  { id: "about", label: "Qui nous ?", component: AboutUs, subItems:[
-    {id: "aboutTeam", label: "L'équipe dirigeant", component: AboutUs},
-    {id: "aboutCompany", label: "L'Entreprise", component: AboutCompany},
-  ] },
+  {
+    id: "about",
+    label: "Qui nous ?",
+    component: AboutUs,
+    subItems: [
+      { id: "aboutTeam", label: "L'équipe dirigeant", component: AboutUs },
+      { id: "aboutCompany", label: "L'Entreprise", component: AboutCompany },
+    ],
+  },
 ];
 
 const Dashboard: React.FC = () => {
@@ -33,8 +38,8 @@ const Dashboard: React.FC = () => {
   const [activeSubItem, setActiveSubItem] = useState<string | null>(null);
 
   const handleTabClick = (itemId: string) => {
-    const item = navItems.find(item => item.id === itemId);
-    
+    const item = navItems.find((item) => item.id === itemId);
+
     if (item?.subItems) {
       // If item has sub-items, set it as active and select first sub-item
       setActiveTab(itemId);
@@ -52,20 +57,22 @@ const Dashboard: React.FC = () => {
 
   // Get the active component based on the selected tab and sub-item
   const getActiveComponent = () => {
-    const currentItem = navItems.find(item => item.id === activeTab);
-    
+    const currentItem = navItems.find((item) => item.id === activeTab);
+
     if (currentItem?.subItems && activeSubItem) {
-      const subItem = currentItem.subItems.find(sub => sub.id === activeSubItem);
+      const subItem = currentItem.subItems.find(
+        (sub) => sub.id === activeSubItem
+      );
       return subItem?.component || currentItem.component;
     }
-    
+
     return currentItem?.component || Dashboard;
   };
 
   const ActiveComponent = getActiveComponent();
 
   // Get current active item to check for sub-items
-  const currentActiveItem = navItems.find(item => item.id === activeTab);
+  const currentActiveItem = navItems.find((item) => item.id === activeTab);
 
   return (
     <div className="flex flex-col min-h-screen">

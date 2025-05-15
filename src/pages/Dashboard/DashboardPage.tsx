@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import {
-  BarChart,
-  Bar,
   LineChart,
   Line,
   XAxis,
@@ -10,429 +8,395 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  AreaChart,
-  Area,
+  BarChart,
+  Bar,
 } from "recharts";
-import {
-  Zap,
-  BatteryCharging,
-  Battery,
-  ArrowDownCircle,
-  DollarSign,
-} from "lucide-react";
 
-// Mock data URL - In production, replace with actual API endpoint
-const DATA_URL =
-  "https://docs.google.com/spreadsheets/d/1DJwf0gs7aZmwT1UrR8fWFIHugYMt1YnB/edit?usp=drive_link&ouid=102773507595007994476&rtpof=true&sd=true";
-
-// Mock data generator functions
-const generatePowerData = () => {
-  const now = new Date();
-  const data = [];
-  for (let i = 0; i < 24; i++) {
-    const hour = (now.getHours() - 23 + i + 24) % 24;
-    data.push({
-      time: `${hour}:00`,
-      consumption: Math.random() * 15 + 5,
-      voltage: Math.random() * 5 + 220,
-      current: Math.random() * 10 + 2,
-    });
-  }
-  return data;
+// Mock API response (your JSON data)
+const mockApiResponse = {
+  range: "'Consommation 2019-2025'!A1:Z1000",
+  majorDimension: "ROWS",
+  values: [
+    ["", "", "", "", "", "", "ELECTRICITE"],
+    [
+      "",
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre",
+      "Total",
+    ],
+    [
+      "2025",
+      "61,335",
+      "66,236",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "127,571",
+    ],
+    [
+      "2024",
+      "67,118",
+      "72,339",
+      "49,859",
+      "29,023",
+      "35,157",
+      "33,455",
+      "37,390",
+      "19,458",
+      "56,073",
+      "71,161",
+      "70,227",
+      "64,395",
+      "605,655",
+    ],
+    [
+      "2023",
+      "46,741",
+      "33,518",
+      "29,334",
+      "29,485",
+      "35,551",
+      "77,536",
+      "74,164",
+      "51,318",
+      "55,217",
+      "72,171",
+      "82,494",
+      "69,306",
+      "656,835",
+    ],
+    [
+      "2022",
+      "75,417",
+      "78,963",
+      "71,945",
+      "77,248",
+      "71,219",
+      "88,530",
+      "77,412",
+      "48,643",
+      "58,489",
+      "68,531",
+      "64,999",
+      "63,104",
+      "844,500",
+    ],
+    [
+      "2021",
+      "84,135",
+      "86,044",
+      "77,063",
+      "83,149",
+      "70,818",
+      "100,351",
+      "96,356",
+      "65,640",
+      "88,231",
+      "88,412",
+      "84,031",
+      "77,470",
+      "1,001,700",
+    ],
+    [
+      "2020",
+      "97,502",
+      "93,251",
+      "84,953",
+      "54,736",
+      "70,541",
+      "98,166",
+      "106,033",
+      "80,830",
+      "92,278",
+      "101,067",
+      "85,324",
+      "91,876",
+      "1,056,557",
+    ],
+    [],
+    [
+      "2019",
+      "78,400",
+      "82,420",
+      "82,320",
+      "86,900",
+      "81,650",
+      "81,390",
+      "100,330",
+      "73,100",
+      "69,320",
+      "103,060",
+      "100,190",
+      "91,210",
+      "1,030,290",
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["Historique Consommation"],
+    [
+      "",
+      "",
+      "",
+      "2,013",
+      "2,014",
+      "2,015",
+      "2,016",
+      "2,017",
+      "2,018",
+      "2,019",
+      "2,020",
+      "2,021",
+      "2,022",
+      "2,023",
+      "2,024",
+    ],
+    [
+      "Consommation électricité en [MWh]",
+      "",
+      "",
+      "809",
+      "843",
+      "956",
+      "998",
+      "1,082",
+      "971",
+      "1,030",
+      "1,057",
+      "1,002",
+      "845",
+      "657",
+      "606",
+    ],
+    [
+      "Consommation électricité en [KWh]",
+      "",
+      "",
+      "808,000",
+      "842,000",
+      "956,000",
+      "998,000",
+      "1,082,190",
+      "971,190",
+      "1,030,280",
+      "1,056,557",
+      "1,001,700",
+      "844,500",
+      "656,835",
+      "605,655",
+    ],
+  ],
 };
 
-const generateDailyData = () => {
-  const data = [];
-  for (let i = 0; i < 30; i++) {
-    data.push({
-      day: i + 1,
-      consumption: Math.random() * 100 + 50,
-      cost: Math.random() * 15 + 5,
-    });
-  }
-  return data;
+// Type definitions
+interface MonthlyData {
+  month: string;
+  [key: string]: number | string;
+}
+
+interface HistoricalData {
+  year: number;
+  consumption: number;
+}
+
+// Utility function to parse numbers with comma as thousands separator
+const parseNumber = (value: string): number => {
+  if (!value || value === "") return 0;
+  return parseFloat(value.replace(/,/g, ""));
 };
 
-const generateRealtimeData = () => {
-  // In a real implementation, this would fetch from your API
-  const realtimeData = [];
-  const now = new Date();
+// Transform the API response into usable data
+const transformApiResponse = (response: typeof mockApiResponse) => {
+  const values = response.values;
 
-  // Generate data for the last 2 minutes in 5-second intervals
-  for (let i = 0; i < 24; i++) {
-    const time = new Date(now.getTime() - (24 - i) * 5000);
-    realtimeData.push({
-      time: time.toLocaleTimeString(),
-      value: Math.random() * 8 + 10, // Random value between 10-18 kW
-    });
-  }
+  // Find the monthly data (starts from row index 1)
+  const monthlyDataStart = 1;
+  const monthlyDataEnd = 9; // Adjust based on your data structure
 
-  return realtimeData;
-};
+  // Extract months from header row
+  const months = values[monthlyDataStart].slice(1, 13) as string[];
 
-export default function DashboardPage() {
-  const [powerData, setPowerData] = useState([]);
-  const [dailyData, setDailyData] = useState([]);
-  const [realtimeData, setRealtimeData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentUsage, setCurrentUsage] = useState(0);
-  const [voltage, setVoltage] = useState(0);
-  const [current, setCurrent] = useState(0);
+  // Transform monthly data for line chart
+  const monthlyChartData: MonthlyData[] = months.map((month, index) => {
+    const dataPoint: MonthlyData = { month };
 
-  // Initial data load
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // In a production environment, you would fetch actual data from your API
-        // For demonstration, we're using mock data but mentioning the Google Sheets URL
-        console.log("Data would be fetched from:", DATA_URL);
-
-        const hourlyData = generatePowerData();
-        const monthlyData = generateDailyData();
-        const rtData = generateRealtimeData();
-
-        setPowerData(hourlyData);
-        setDailyData(monthlyData);
-        setRealtimeData(rtData);
-        setCurrentUsage(rtData[rtData.length - 1].value);
-        setVoltage(hourlyData[hourlyData.length - 1].voltage);
-        setCurrent(hourlyData[hourlyData.length - 1].current);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
+    for (
+      let rowIndex = monthlyDataStart + 1;
+      rowIndex < monthlyDataEnd;
+      rowIndex++
+    ) {
+      const row = values[rowIndex];
+      if (row && row[0] && row[0] !== "") {
+        const year = row[0] as string;
+        const value = row[index + 1] as string;
+        dataPoint[year] = parseNumber(value);
       }
-    };
+    }
 
-    fetchData();
-  }, []);
+    return dataPoint;
+  });
 
-  // Real-time data update every 5 seconds
-  useEffect(() => {
-    if (loading) return;
+  // Find historical data (looks for row with "Historique Consommation")
+  let historicalStartIndex = -1;
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] && values[i][0] === "Historique Consommation") {
+      historicalStartIndex = i;
+      break;
+    }
+  }
 
-    const interval = setInterval(() => {
-      setRealtimeData((prevData) => {
-        const newData = [...prevData.slice(1)];
-        const now = new Date();
-        const newValue = Math.random() * 8 + 10; // Random value between 10-18 kW
+  // Transform historical data for bar chart (using kWh row instead of MWh)
+  let historicalData: HistoricalData[] = [];
+  if (historicalStartIndex !== -1 && values[historicalStartIndex + 3]) {
+    const yearRow = values[historicalStartIndex + 1];
+    const consumptionRow = values[historicalStartIndex + 3]; // Using kWh row instead of MWh
 
-        newData.push({
-          time: now.toLocaleTimeString(),
-          value: newValue,
-        });
+    if (yearRow && consumptionRow) {
+      for (let i = 3; i < yearRow.length; i++) {
+        const year = parseNumber(yearRow[i] as string);
+        const consumption = parseNumber(consumptionRow[i] as string);
 
-        setCurrentUsage(newValue);
-        return newData;
-      });
-    }, 5000);
+        if (year && consumption) {
+          historicalData.push({ year, consumption });
+        }
+      }
+    }
+  }
 
-    return () => clearInterval(interval);
-  }, [loading]);
+  return { monthlyChartData, historicalData };
+};
 
-  // Calculate some additional metrics
-  const averageConsumption = powerData.length
-    ? powerData.reduce((sum, item) => sum + item.consumption, 0) /
-      powerData.length
-    : 0;
-
-  const dailyTotal = powerData.length
-    ? powerData.reduce((sum, item) => sum + item.consumption, 0)
-    : 0;
-
-  const monthlyCost = dailyData.length
-    ? dailyData.reduce((sum, item) => sum + item.cost, 0).toFixed(2)
-    : 0;
-
-  if (loading) {
+// Custom tooltip to format numbers nicely
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-64 bg-gray-50">
-        <div className="text-blue-600 animate-spin w-16 h-16">
-          <Zap size={64} />
-        </div>
-        <h2 className="mt-4 text-xl font-semibold text-gray-700">
-          chargement PowerLogic™ PM5100 Data...
-        </h2>
+      <div className="bg-white p-4 border rounded shadow-lg">
+        <p className="font-medium">{`${label}`}</p>
+        {payload.map((entry: any, index: number) => (
+          <p key={index} style={{ color: entry.color }}>
+            {`${entry.name}: ${entry.value.toLocaleString()} kWh`}
+          </p>
+        ))}
       </div>
     );
   }
+  return null;
+};
+
+const DashboardPage: React.FC = () => {
+  // Transform the API response data
+  const { monthlyChartData, historicalData } = useMemo(() => {
+    return transformApiResponse(mockApiResponse);
+  }, []);
+
+  const colors = [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff7c7c",
+    "#8dd1e1",
+    "#d084d0",
+    "#82d982",
+  ];
 
   return (
-    <>
-      {/* Device Summary */}
-      <div>
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 rounded-xl shadow-sm">
-            <div className="mr-4">
-              <h2 className="text-lg font-medium">
-                PowerLogic™ PM5100 - Model EAV15105-FR11
-              </h2>
-              <p className="text-sm text-wrap">
-                Compteur de puissance avancé avec des capacités de surveillance
-                et de mesure de haute précision
-              </p>
-            </div>
-            <div className="mt-2 md:mt-0 grid grid-cols-2 gap-x-6 gap-y-1 text-sm">
-              <div className="flex items-center">
-                <span className="text-gray-500">Serie:</span>
-                <span className="ml-2 font-medium">PM51-22871</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-gray-500">Firmware:</span>
-                <span className="ml-2 font-medium">v3.2.1</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-gray-500">Status:</span>
-                <span className="ml-2 font-medium text-green-600">Online</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-gray-500">dernier mise à jour:</span>
-                <span className="ml-2 font-medium">Just now</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="w-full p-6 space-y-8">
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Tableau de bord de la consommation d’électricité
+      </h1>
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">
-              Puissance actuelle
-            </h3>
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Zap size={20} className="text-blue-600" />
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex items-end">
-              <p className="text-3xl font-bold text-gray-800">
-                {currentUsage.toFixed(2)}
-              </p>
-              <p className="text-lg ml-2 text-gray-600">kW</p>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">
-              Consommation en temps réel
-            </p>
-          </div>
-          <div className="mt-4 flex items-center text-sm">
-            <ArrowDownCircle size={16} className="text-green-500 mr-1" />
-            <span className="text-green-500 font-medium">12% moins</span>
-            <span className="text-gray-500 ml-1">qu'hier</span>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Tention</h3>
-            <div className="p-2 bg-amber-100 rounded-lg">
-              <BatteryCharging size={20} className="text-amber-600" />
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex items-end">
-              <p className="text-3xl font-bold text-gray-800">
-                {voltage.toFixed(1)}
-              </p>
-              <p className="text-lg ml-2 text-gray-600">V</p>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">Niveau de tension CA</p>
-          </div>
-          <div className="mt-4 flex items-center text-sm">
-            <div className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
-              Normal
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between">
-            <h3 className="text-gray-500 text-sm font-medium">Courant</h3>
-            <div className="p-2 bg-indigo-100 rounded-lg">
-              <Battery size={20} className="text-indigo-600" />
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex items-end">
-              <p className="text-3xl font-bold text-gray-800">
-                {current.toFixed(2)}
-              </p>
-              <p className="text-lg ml-2 text-gray-600">A</p>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">Flux de courant</p>
-          </div>
-          <div className="mt-4 flex items-center text-sm">
-            <div className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">
-              heures de pointe
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Real-time chart */}
-      <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
-        <h3 className="text-lg font-medium text-gray-800 mb-4">
-          Consommation d’énergie en temps réel
-        </h3>
-        <p className="text-sm text-gray-500 mb-4">
-          Données en direct mises à jour toutes les 5 secondes
-        </p>
-        <div className="h-64">
+      {/* Monthly Consumption Chart */}
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h2 className="text-2xl font-semibold mb-4">
+          Consommation mensuelle par année (en Kwh)
+        </h2>
+        <div className="h-96">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={realtimeData}
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="time" stroke="#9ca3af" fontSize={12} />
-              <YAxis
-                stroke="#9ca3af"
-                fontSize={12}
-                unit="kW"
-                domain={[0, "auto"]}
-              />
-              <Tooltip contentStyle={{ borderRadius: "8px" }} />
-              <Area
-                type="monotone"
-                dataKey="value"
-                stroke="#3b82f6"
-                fill="#93c5fd"
-                strokeWidth={2}
-                dot={{ r: 2 }}
-                activeDot={{ r: 6 }}
-              />
-            </AreaChart>
+            <LineChart data={monthlyChartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis tickFormatter={(value) => `${value.toLocaleString()}`} />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend />
+              {Object.keys(monthlyChartData[0] || {})
+                .filter((key) => key !== "month")
+                .map((year, index) => (
+                  <Line
+                    key={year}
+                    type="monotone"
+                    dataKey={year}
+                    stroke={colors[index % colors.length]}
+                    strokeWidth={2}
+                    connectNulls={false}
+                  />
+                ))}
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Consommation d’énergie 24 heures
-          </h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={powerData}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="time" stroke="#9ca3af" fontSize={12} />
-                <YAxis stroke="#9ca3af" fontSize={12} unit="kW" />
-                <Tooltip contentStyle={{ borderRadius: "8px" }} />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="consumption"
-                  stroke="#3b82f6"
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">
-            Consommation mensuelle
-          </h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={dailyData}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="day" stroke="#9ca3af" fontSize={12} />
-                <YAxis stroke="#9ca3af" fontSize={12} unit="kWh" />
-                <Tooltip contentStyle={{ borderRadius: "8px" }} />
-                <Legend />
-                <Bar
-                  dataKey="consumption"
-                  fill="#3b82f6"
-                  radius={[4, 4, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+      {/* Historical Overview Chart */}
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h2 className="text-2xl font-semibold mb-4">
+          Aperçu de la consommation annuelle (en Kwh)
+        </h2>
+        <div className="h-96">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={historicalData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="year" />
+              <YAxis tickFormatter={(value) => `${value.toLocaleString()}`} />
+              <Tooltip
+                formatter={(value: number) => [
+                  `${value.toLocaleString()} kWh`,
+                  "Consumption",
+                ]}
+                labelFormatter={(label) => `Year: ${label}`}
+              />
+              <Bar dataKey="consumption" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
-
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-medium text-gray-800 mb-2">
-            Aperçu quotidien
-          </h3>
-          <div className="flex items-center justify-between mt-4">
-            <div>
-              <p className="text-gray-500 text-sm">Total Consumption</p>
-              <p className="text-xl font-bold text-gray-800 mt-1">
-                {dailyTotal.toFixed(2)} kWh
-              </p>
-            </div>
-            <div>
-              <p className="text-gray-500 text-sm">Average Load</p>
-              <p className="text-xl font-bold text-gray-800 mt-1">
-                {averageConsumption.toFixed(2)} kW
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-medium text-gray-800 mb-2">
-            Coût mensuel
-          </h3>
-          <div className="flex items-center mt-4">
-            {/* <DollarSign size={28} className="text-green-600 mr-2" /> */}
-            <p className="text-3xl font-bold text-gray-800">{monthlyCost} <span className="text-3xl font-bold text-green-600">MAD</span></p>
-          </div>
-          <div className="mt-2">
-            <div className="flex justify-between text-sm text-gray-500">
-              <span>Économies prévues</span>
-              <span className="text-green-600 font-medium">12.45</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-medium text-gray-800 mb-2">
-            Qualité de puissance
-          </h3>
-          <div className="mt-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-500">
-                Facteur de puissance
-              </span>
-              <span className="text-sm font-medium text-gray-800">0.92</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-blue-600 h-2 rounded-full"
-                style={{ width: "92%" }}
-              ></div>
-            </div>
-          </div>
-          <div className="mt-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-500">THD (%)</span>
-              <span className="text-sm font-medium text-gray-800">2.7%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-green-500 h-2 rounded-full"
-                style={{ width: "27%" }}
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    </div>
   );
-}
+};
+
+export default DashboardPage;
