@@ -26,10 +26,7 @@ const navItems = [
   {
     id: "zone",
     label: "Zone",
-    subItems: [
-      { id: "workshops", label: "Ateliers", component: WorkshopsManagement },
-      { id: "machines", label: "Machines", component: MachinesPage },
-    ],
+    component: WorkshopsManagement,
   },
   {
     id: "measuring-system",
@@ -41,7 +38,7 @@ const navItems = [
     label: "Qui nous ?",
     component: AboutUs,
     subItems: [
-      { id: "aboutTeam", label: "L'équipe dirigeant", component: AboutUs },
+      { id: "aboutTeam", label: "L'équipe dirigeante", component: AboutUs },
       { id: "aboutCompany", label: "L'Entreprise", component: AboutCompany },
     ],
   },
