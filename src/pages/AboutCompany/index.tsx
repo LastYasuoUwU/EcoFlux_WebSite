@@ -163,10 +163,6 @@ const AboutCompany: React.FC = () => {
               <h3 className="text-blue-900 font-bold text-xl">DURABILITÉ</h3>
             </div>
           </div>
-          <div className="mt-6 text-center">
-            <h3 className="font-bold text-blue-900 text-xl">TENMAR</h3>
-            <p className="text-blue-800">TEXTILE & INNOVATION</p>
-          </div>
         </section>
 
         {/* Chiffres Clés */}
