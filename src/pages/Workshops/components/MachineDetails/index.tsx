@@ -77,8 +77,8 @@ export default function MachinesDetails({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-3xl overflow-auto p-6 m-4">
-        <div className="flex justify-between items-center mb-6">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl h-3/4 max-h-3xl overflow-y-auto p-6 m-4">
+        <div className="bg-white flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">{machineName}</h2>
           <button
             onClick={onClose}
@@ -90,13 +90,13 @@ export default function MachinesDetails({
 
         <div className="grid md:grid-cols-1 gap-6">
           {/* Charts Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             {/* First Chart: Function vs Power */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2 text-gray-700">
                 Consommation (en Kwh)
               </h3>
-              <div className="h-64">
+              <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={chartData}
@@ -107,7 +107,7 @@ export default function MachinesDetails({
                       dataKey="name"
                       angle={-45}
                       textAnchor="end"
-                      height={70}
+                      height={110}
                       tick={{ fontSize: 12 }}
                     />
                     <YAxis />
@@ -133,7 +133,7 @@ export default function MachinesDetails({
               <h3 className="text-xl font-semibold mb-2 text-gray-700">
                 Impact carbone (en kgCO2e)
               </h3>
-              <div className="h-64">
+              <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={chartData}
@@ -144,7 +144,7 @@ export default function MachinesDetails({
                       dataKey="name"
                       angle={-45}
                       textAnchor="end"
-                      height={70}
+                      height={110}
                       tick={{ fontSize: 12 }}
                     />
                     <YAxis />

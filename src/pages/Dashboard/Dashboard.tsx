@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DashboardPage from "./DashboardPage";
 import AboutUs from "../AboutUs";
 import MeasuringSystemPage from "../MeasuringSystem";
-import MachinesPage from "../Machines";
 import WorkshopsManagement from "../Workshops";
 import AboutCompany from "../AboutCompany";
 import { Button, Menu, MenuItem } from "@mui/material";
@@ -38,7 +37,7 @@ const navItems = [
     label: "Qui sommes-nous ?",
     component: AboutUs,
     subItems: [
-      { id: "aboutTeam", label: "L'équipe dirigeante", component: AboutUs },
+      { id: "aboutTeam", label: "L'équipe", component: AboutUs },
       { id: "aboutCompany", label: "L'Entreprise", component: AboutCompany },
     ],
   },

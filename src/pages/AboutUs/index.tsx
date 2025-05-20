@@ -10,7 +10,7 @@ const AboutUs = () => {
       try {
         setIsLoading(true);
         // Simulate delay for demo purposes - remove in production
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const { data, error } = await supabase.from("aboutUs").select();
         if (error) throw error;

@@ -265,7 +265,7 @@ export default function WorkshopsManagement() {
 
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <h3 className="font-bold text-lg text-blue-800 mb-2">
-                    Top Contributors
+                    Meilleurs contributeurs
                   </h3>
                   <ul className="space-y-2">
                     {sortedData.slice(0, 3).map((item, idx) => (

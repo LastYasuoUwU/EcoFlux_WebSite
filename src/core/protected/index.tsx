@@ -1,6 +1,6 @@
-import { useAuth } from '@clerk/react-router';
-import { Navigate } from 'react-router';
-import React from "react";
+import { useAuth } from "@clerk/react-router";
+import { Navigate } from "react-router";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./styles.scss";
 
@@ -21,23 +21,18 @@ function AnimatedLogo() {
           initial={{ WebkitMaskSize: "0% 100%" }}
           animate={{ WebkitMaskSize: "100% 100%" }}
           transition={{ duration: 2, ease: "easeInOut" }}
-          style={{ maskImage: 'url(https://res.cloudinary.com/dbhv2ff2q/image/upload/v1745323540/just%20testing/eo6tub43wci8p2aabwcw.svg)', maskRepeat: 'no-repeat', maskPosition: 'center', maskSize: 'contain' }}
+          style={{
+            maskImage:
+              "url(https://res.cloudinary.com/dbhv2ff2q/image/upload/v1745323540/just%20testing/eo6tub43wci8p2aabwcw.svg)",
+            maskRepeat: "no-repeat",
+            maskPosition: "center",
+            maskSize: "contain",
+          }}
         />
-
-        {/* Sparkles after fill */}
-        <motion.div
-          className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{ delay: 2.5, duration: 1 }}
-        >
-          <div className="sparkle"></div>
-        </motion.div>
       </motion.div>
     </div>
   );
 }
-
 
 type ProtectedRouteProps = {
   children: React.ReactNode;
@@ -45,19 +40,37 @@ type ProtectedRouteProps = {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { isSignedIn, isLoaded } = useAuth();
-  
-  if (!isLoaded) {
-    // return <div>Loading...</div>;
-    return <AnimatedLogo/>;
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    // If auth is loaded and user is signed in, start the timer
+    if (isLoaded && isSignedIn) {
+      const timer = setTimeout(() => {
+        setShowLoader(false);
+      }, 2000); //8 seconds
+
+      // Clean up the timer if component unmounts
+      return () => clearTimeout(timer);
+    }
+
+    // If user is not signed in, no need for loader
+    if (isLoaded && !isSignedIn) {
+      setShowLoader(false);
+    }
+  }, [isLoaded, isSignedIn]);
+
+  // Show loader if not loaded or during the 5 second wait period
+  if (!isLoaded || showLoader) {
+    return <AnimatedLogo />;
   }
-  
+
+  // Redirect if not signed in
   if (!isSignedIn) {
     return <Navigate to="/" />;
   }
-  
+
+  // User is authenticated and loader time elapsed, show the protected content
   return <>{children}</>;
 };
 
 export default ProtectedRoute;
-
-
