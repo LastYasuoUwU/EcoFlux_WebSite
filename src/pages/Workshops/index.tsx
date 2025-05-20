@@ -4,12 +4,12 @@ import {
   Pie,
   Cell,
   ResponsiveContainer,
-  Legend,
   Tooltip,
+  Legend,
 } from "recharts";
 import { zoneData } from "./data";
+import MachinesDetails from "./components/MachineDetails";
 
-// Convert the data structure to an array format suitable for Recharts
 const prepareChartData = () => {
   const data = [];
 
@@ -24,13 +24,14 @@ const prepareChartData = () => {
       PU: zone.PU,
       consumption: zone.consumption,
       carboneImpact: zone.carboneImpact,
+      machinesData: zone.machinesData,
     });
   });
 
   return data;
 };
 
-// Colors for the pie chart segments
+// Colors for the chart segments
 const COLORS = [
   "#0088FE",
   "#00C49F",
@@ -39,16 +40,24 @@ const COLORS = [
   "#8884d8",
   "#82ca9d",
   "#ffc658",
+  "#5210C2",
+  "#53D042",
 ];
 
 export default function WorkshopsManagement() {
   const [chartData] = useState(prepareChartData());
+  const [selectedZone, setSelectedZone] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
-  // Labels for the three charts
-  const chartLabels = [
-    { title: "Consommation en kWh", dataKey: "consumption" },
-    { title: "Puissance en kW", dataKey: "PU" },
-    { title: "Impact carbone en kgCO2e", dataKey: "carboneImpact" },
+  // Labels for the three metrics
+  const metrics = [
+    { title: "Puissance en kW", dataKey: "PU", color: "#0088FE" },
+    { title: "Consommation en kWh", dataKey: "consumption", color: "#00C49F" },
+    {
+      title: "Impact carbone en kgCO2e",
+      dataKey: "carboneImpact",
+      color: "#FF8042",
+    },
   ];
 
   // Format large numbers with thousands separator
@@ -56,6 +65,34 @@ export default function WorkshopsManagement() {
     return new Intl.NumberFormat("fr-FR").format(value);
   };
 
+  // Calculate totals for each metric
+  const calculateTotal = (dataKey) => {
+    return chartData.reduce((sum, item) => sum + item[dataKey], 0);
+  };
+
+  // Sort data for each metric to show biggest segments first
+  const getSortedData = (dataKey) => {
+    return [...chartData].sort((a, b) => b[dataKey] - a[dataKey]);
+  };
+
+  // Custom tooltip for pie charts
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      const value = payload[0].value;
+
+      return (
+        <div className="bg-white p-2 border border-gray-300 rounded shadow-md">
+          <p className="font-bold">{data.name}</p>
+          <p>{`${payload[0].name}: ${formatNumber(value)}`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  // Pie chart label renderer
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -81,42 +118,96 @@ export default function WorkshopsManagement() {
     );
   };
 
-  // Custom tooltip to show full values
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      const value = payload[0].value;
-
-      return (
-        <div className="bg-white p-2 border border-gray-300 rounded shadow-md">
-          <p className="font-bold">{data.name}</p>
-          <p>{`${payload[0].name}: ${formatNumber(value)}`}</p>
-        </div>
-      );
-    }
-
-    return null;
+  // Handle opening the popup with zone details
+  const handleViewDetails = (zone) => {
+    setSelectedZone(zone);
+    setShowPopup(true);
   };
 
-  // Calculate totals for each metric
-  const calculateTotal = (dataKey) => {
-    return chartData.reduce((sum, item) => sum + item[dataKey], 0);
-  };
+  // Popup component for zone details
+  const ZoneDetailsPopup = ({ zone }) => {
+    if (!zone) return null;
 
-  const totalConsumption = calculateTotal("consumption");
-  const totalPU = calculateTotal("PU");
-  const totalCarbonImpact = calculateTotal("carboneImpact");
-
-  // Sort data for each chart to show biggest segments first
-  const getSortedData = (dataKey) => {
-    return [...chartData].sort((a, b) => b[dataKey] - a[dataKey]);
+    return (
+      <MachinesDetails
+        machineName={zone.name}
+        data={zone.machinesData}
+        isOpen={showPopup}
+        onClose={() => setShowPopup(false)}
+      />
+    );
   };
 
   return (
     <div className="flex flex-col items-center w-full bg-gray-50 p-6 rounded-lg">
-      {chartLabels.map((chart, index) => {
-        const sortedData = getSortedData(chart.dataKey);
-        const totalValue = calculateTotal(chart.dataKey);
+      {/* Combined Table */}
+      <div className="w-full max-w-6xl mb-16 bg-white p-8 rounded-xl shadow-md">
+        <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">
+          Vue d'ensemble des ateliers
+        </h2>
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="py-2 px-4 border text-left">Zone</th>
+                <th className="py-2 px-4 border text-right">Puissance en kW</th>
+                <th className="py-2 px-4 border text-right">
+                  Consommation en kWh
+                </th>
+                <th className="py-2 px-4 border text-right">
+                  Impact carbone en kgCO2e
+                </th>
+                <th className="py-2 px-4 border text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {getSortedData("consumption").map((item, idx) => (
+                <tr key={idx} className={idx % 2 === 0 ? "bg-gray-50" : ""}>
+                  <td className="py-2 px-4 border">{item.name}</td>
+                  <td className="py-2 px-4 border text-right">
+                    {formatNumber(item.PU)}
+                  </td>
+                  <td className="py-2 px-4 border text-right">
+                    {formatNumber(item.consumption)}
+                  </td>
+                  <td className="py-2 px-4 border text-right">
+                    {formatNumber(item.carboneImpact)}
+                  </td>
+                  <td className="py-2 px-4 border text-center">
+                    <button
+                      onClick={() => handleViewDetails(item)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm"
+                    >
+                      Détails
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr className="bg-gray-200 font-bold">
+                <td className="py-2 px-4 border">Total</td>
+                <td className="py-2 px-4 border text-right">
+                  {formatNumber(calculateTotal("PU"))}
+                </td>
+                <td className="py-2 px-4 border text-right">
+                  {formatNumber(calculateTotal("consumption"))}
+                </td>
+                <td className="py-2 px-4 border text-right">
+                  {formatNumber(calculateTotal("carboneImpact"))}
+                </td>
+                <td className="py-2 px-4 border"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      {/* Three charts below the table */}
+      {metrics.map((metric, index) => {
+        const sortedData = getSortedData(metric.dataKey);
+        const totalValue = calculateTotal(metric.dataKey);
 
         return (
           <div
@@ -124,7 +215,7 @@ export default function WorkshopsManagement() {
             className="w-full max-w-6xl mb-16 bg-white p-8 rounded-xl shadow-md"
           >
             <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">
-              {chart.title}
+              {metric.title}
             </h2>
 
             <div className="flex flex-col md:flex-row items-center">
@@ -141,7 +232,7 @@ export default function WorkshopsManagement() {
                       outerRadius={140}
                       innerRadius={60}
                       fill="#8884d8"
-                      dataKey={chart.dataKey}
+                      dataKey={metric.dataKey}
                       paddingAngle={2}
                     >
                       {sortedData.map((entry, index) => (
@@ -165,7 +256,7 @@ export default function WorkshopsManagement() {
               <div className="w-full md:w-1/3 mt-8 md:mt-0 md:pl-8">
                 <div className="bg-blue-50 p-4 rounded-lg mb-4">
                   <h3 className="font-bold text-lg text-blue-800 mb-2">
-                    Total {chart.title}
+                    Total {metric.title}
                   </h3>
                   <p className="text-2xl font-bold">
                     {formatNumber(totalValue)}
@@ -192,12 +283,13 @@ export default function WorkshopsManagement() {
                           <span>{item.name}</span>
                         </div>
                         <div className="font-medium">
-                          {formatNumber(item[chart.dataKey])}
+                          {formatNumber(item[metric.dataKey])}
                           <span className="text-xs text-gray-500 ml-1">
                             (
-                            {((item[chart.dataKey] / totalValue) * 100).toFixed(
-                              1
-                            )}
+                            {(
+                              (item[metric.dataKey] / totalValue) *
+                              100
+                            ).toFixed(1)}
                             %)
                           </span>
                         </div>
@@ -207,46 +299,12 @@ export default function WorkshopsManagement() {
                 </div>
               </div>
             </div>
-
-            {/* Table beneath chart showing all values */}
-            <div className="mt-8 overflow-x-auto">
-              <table className="min-w-full bg-white border border-gray-200">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="py-2 px-4 border text-left">Zone</th>
-                    <th className="py-2 px-4 border text-right">
-                      {chart.title}
-                    </th>
-                    <th className="py-2 px-4 border text-right">Pourcentage</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedData.map((item, idx) => (
-                    <tr key={idx} className={idx % 2 === 0 ? "bg-gray-50" : ""}>
-                      <td className="py-2 px-4 border">{item.name}</td>
-                      <td className="py-2 px-4 border text-right">
-                        {formatNumber(item[chart.dataKey])}
-                      </td>
-                      <td className="py-2 px-4 border text-right">
-                        {((item[chart.dataKey] / totalValue) * 100).toFixed(1)}%
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr className="bg-gray-200 font-bold">
-                    <td className="py-2 px-4 border">Total</td>
-                    <td className="py-2 px-4 border text-right">
-                      {formatNumber(totalValue)}
-                    </td>
-                    <td className="py-2 px-4 border text-right">100%</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
           </div>
         );
       })}
+
+      {/* Details Popup */}
+      {showPopup && <ZoneDetailsPopup zone={selectedZone} />}
     </div>
   );
 }

@@ -1,47 +1,77 @@
+import { atelierCoupeData } from "./data/AtelierCoupeData";
+import { atelierDecorsData } from "./data/AtelierDecorsData";
+import { atelierDetachageData } from "./data/AtelierDetachageData";
+import { climatiseursBureauxData } from "./data/ClimatiseursBureauxData";
+import { eclairageData } from "./data/EclairageData";
+import { equipementsData } from "./data/EquipementsData";
+import { machineACoudreData } from "./data/MachineACoudreData";
+import { materielsInformatiquesData } from "./data/MaterielsInformatiquesData";
+import { repassageData } from "./data/RepassageData";
+
 export const zoneData = [
   {
     machineAcoudre: {
-      name: "Machine a coudre",
+      name: "Machine à coudre",
       PU: 370.93,
-      consumption: 810111.12,
-      carboneImpact: 526572.23,
+      consumption: 849429.7,
+      carboneImpact: 552129.3,
+      machinesData: machineACoudreData,
     },
     ateliersDecors: {
-      name: "Atelier Decors",
+      name: "Atelier décors",
       PU: 351.89,
-      consumption: 768527.76,
-      carboneImpact: 499543.04,
+      consumption: 805828.1,
+      carboneImpact: 523788.27,
+      machinesData: atelierDecorsData,
     },
     ateliersCoupe: {
-      name: "Atelier Coupe",
+      name: "Atelier coupe",
       PU: 74.94,
-      consumption: 163673.3,
-      carboneImpact: 106387.66,
+      consumption: 171617.2,
+      carboneImpact: 111551.17,
+      machinesData: atelierCoupeData,
     },
     repassage: {
       name: "Repassage",
       PU: 45.3,
-      consumption: 98935.2,
-      carboneImpact: 64307.88,
+      consumption: 103737,
+      carboneImpact: 67429.05,
+      machinesData: repassageData,
     },
     climatiseur: {
-      name: "Climatiseurs",
-      PU: 150.52,
-      consumption: 181019.28,
-      carboneImpact: 117662.53,
+      name: "Climatiseurs bureaux",
+      PU: 43.13,
+      consumption: 33339.49,
+      carboneImpact: 21670.67,
+      machinesData: climatiseursBureauxData,
     },
-    // eclairage:{}
+    equipement: {
+      name: "Équipements",
+      PU: 150.52,
+      consumption: 190260.55,
+      carboneImpact: 123669.36,
+      machinesData: equipementsData,
+    },
     atelierDetachage: {
-      name: "Atelier Detachage",
+      name: "Atelier détachage",
       PU: 17.63,
-      consumption: 36199.2,
-      carboneImpact: 23529.48,
+      consumption: 37953.5,
+      carboneImpact: 24669.78,
+      machinesData: atelierDetachageData,
     },
     materielsInformatique: {
       name: "Matériels informatiques",
       PU: 18.06,
-      consumption: 160093.75,
-      carboneImpact: 104060.94,
+      consumption: 235759.1,
+      carboneImpact: 153243.41,
+      machinesData: materielsInformatiquesData,
+    },
+    eclairage: {
+      name: "Éclairage",
+      PU: 3.43,
+      consumption: 57444.66,
+      carboneImpact: 37339.03,
+      machinesData: eclairageData,
     },
   },
 ];
