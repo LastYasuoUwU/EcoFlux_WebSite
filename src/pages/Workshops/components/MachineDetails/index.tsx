@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { XCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
 import {
@@ -113,7 +112,12 @@ export default function MachinesDetails({
                     />
                     <YAxis />
                     <Tooltip />
-                    <Legend />
+                    <Legend
+                      align="left"
+                      verticalAlign="bottom"
+                      height={36}
+                      wrapperStyle={{ bottom: -10 }}
+                    />
                     <Bar
                       dataKey="power"
                       name="Consommation (kwH)"
@@ -145,7 +149,12 @@ export default function MachinesDetails({
                     />
                     <YAxis />
                     <Tooltip />
-                    <Legend />
+                    <Legend
+                      align="left"
+                      verticalAlign="bottom"
+                      height={36}
+                      wrapperStyle={{ bottom: -10 }}
+                    />
                     <Bar
                       dataKey="carbonImpact"
                       name="Impact carbone (kgCO2e)"
