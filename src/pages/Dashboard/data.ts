@@ -195,6 +195,7 @@ export const dashboardData = {
       "2,022",
       "2,023",
       "2,024",
+      "2,025",
     ],
     [
       "Consommation électricité en [MWh]",
@@ -229,6 +230,7 @@ export const dashboardData = {
       "844,500",
       "656,835",
       "605,655",
+      "243, 922",
     ],
   ],
 };
