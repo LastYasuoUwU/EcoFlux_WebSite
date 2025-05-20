@@ -114,7 +114,11 @@ export default function MachinesDetails({
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="power" name="PU (kW)" fill="#3b82f6" />
+                    <Bar
+                      dataKey="power"
+                      name="Consommation (kwH)"
+                      fill="#3b82f6"
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
