@@ -10,6 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { formatName } from "../../../../utils";
 
 // Define the type for our machine data
 interface MachineData {
@@ -70,7 +71,10 @@ export default function MachinesDetails({
 
   // Prepare chart data
   const chartData = data.map((item) => ({
-    name: item.Fonction || item.Emplacement || item.Modele,
+    name:
+      formatName(item.Fonction) ||
+      formatName(item.Emplacement) ||
+      formatName(item.Modele),
     power: item["Consommation Kwh"],
     carbonImpact: item["Impact carbone en kgCO2e"],
   }));

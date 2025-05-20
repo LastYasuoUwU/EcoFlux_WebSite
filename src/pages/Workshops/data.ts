@@ -11,21 +11,21 @@ import { repassageData } from "./data/RepassageData";
 export const zoneData = [
   {
     machineAcoudre: {
-      name: "Machine à coudre",
+      name: "Machine Â Coudre",
       PU: 370.93,
       consumption: 849429.7,
       carboneImpact: 552129.3,
       machinesData: machineACoudreData,
     },
     ateliersDecors: {
-      name: "Atelier décors",
+      name: "Atelier Décors",
       PU: 351.89,
       consumption: 805828.1,
       carboneImpact: 523788.27,
       machinesData: atelierDecorsData,
     },
     ateliersCoupe: {
-      name: "Atelier coupe",
+      name: "Atelier Coupe",
       PU: 74.94,
       consumption: 171617.2,
       carboneImpact: 111551.17,
@@ -39,7 +39,7 @@ export const zoneData = [
       machinesData: repassageData,
     },
     climatiseur: {
-      name: "Climatiseurs bureaux",
+      name: "Climatiseurs Bureaux",
       PU: 43.13,
       consumption: 33339.49,
       carboneImpact: 21670.67,
@@ -53,14 +53,14 @@ export const zoneData = [
       machinesData: equipementsData,
     },
     atelierDetachage: {
-      name: "Atelier détachage",
+      name: "Atelier Détachage",
       PU: 17.63,
       consumption: 37953.5,
       carboneImpact: 24669.78,
       machinesData: atelierDetachageData,
     },
     materielsInformatique: {
-      name: "Matériels informatiques",
+      name: "Matériels Informatiques",
       PU: 18.06,
       consumption: 235759.1,
       carboneImpact: 153243.41,
