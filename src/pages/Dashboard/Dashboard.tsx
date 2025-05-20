@@ -35,7 +35,7 @@ const navItems = [
   },
   {
     id: "about",
-    label: "Qui nous ?",
+    label: "Qui sommes-nous ?",
     component: AboutUs,
     subItems: [
       { id: "aboutTeam", label: "L'équipe dirigeante", component: AboutUs },
