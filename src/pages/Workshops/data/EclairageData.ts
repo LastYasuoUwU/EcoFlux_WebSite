@@ -1,5 +1,6 @@
 export const eclairageData = [
   {
+    Emplacement: "MMP",
     "Qtité ": 26,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -12,6 +13,7 @@ export const eclairageData = [
     "Ecart ": -13,
   },
   {
+    Emplacement: "MMP",
     "Qtité ": null,
     "puissance\n en W ": null,
     "Pu en Kw": null,
@@ -24,6 +26,7 @@ export const eclairageData = [
     "Ecart ": -9,
   },
   {
+    Emplacement: "MMP",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -36,6 +39,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "MMP",
     "Qtité ": 2,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -48,6 +52,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "MMP",
     "Qtité ": 2,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -60,6 +65,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 29,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -72,6 +78,7 @@ export const eclairageData = [
     "Ecart ": -49,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 1,
     "puissance\n en W ": 55,
     "Pu en Kw": 0.055,
@@ -84,6 +91,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -96,6 +104,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -108,6 +117,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 1,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -120,6 +130,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -132,6 +143,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Coupe",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -144,6 +156,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 40,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -156,6 +169,7 @@ export const eclairageData = [
     "Ecart ": -42,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 2,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -168,6 +182,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 2,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -180,6 +195,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 4,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -192,6 +208,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 1,
     "puissance\n en W ": 55,
     "Pu en Kw": 0.055,
@@ -204,6 +221,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 2,
     "puissance\n en W ": 55,
     "Pu en Kw": 0.055,
@@ -216,6 +234,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": null,
     "puissance\n en W ": null,
     "Pu en Kw": null,
@@ -228,6 +247,7 @@ export const eclairageData = [
     "Ecart ": -3,
   },
   {
+    Emplacement: "Zone Décor",
     "Qtité ": 8,
     "puissance\n en W ": null,
     "Pu en Kw": null,
@@ -240,6 +260,7 @@ export const eclairageData = [
     "Ecart ": -6,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -252,6 +273,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -264,6 +286,7 @@ export const eclairageData = [
     "Ecart ": -4,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 9,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -276,6 +299,7 @@ export const eclairageData = [
     "Ecart ": -1,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 7,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -288,6 +312,7 @@ export const eclairageData = [
     "Ecart ": -4,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -300,6 +325,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 6,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -312,6 +338,7 @@ export const eclairageData = [
     "Ecart ": -6,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 6,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -324,6 +351,7 @@ export const eclairageData = [
     "Ecart ": -5,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -336,6 +364,7 @@ export const eclairageData = [
     "Ecart ": -3,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 9,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -348,6 +377,7 @@ export const eclairageData = [
     "Ecart ": -3,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 9,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -360,6 +390,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 4,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -372,6 +403,7 @@ export const eclairageData = [
     "Ecart ": -7,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -384,6 +416,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 3,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -396,6 +429,7 @@ export const eclairageData = [
     "Ecart ": -8,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -408,6 +442,7 @@ export const eclairageData = [
     "Ecart ": -1,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -420,6 +455,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -432,6 +468,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -444,6 +481,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -456,6 +494,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -468,6 +507,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -480,6 +520,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -492,6 +533,7 @@ export const eclairageData = [
     "Ecart ": -3,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 6,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -504,6 +546,7 @@ export const eclairageData = [
     "Ecart ": -4,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 7,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -516,6 +559,7 @@ export const eclairageData = [
     "Ecart ": -4,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -528,6 +572,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 1,
     "puissance\n en W ": 44,
     "Pu en Kw": 0.044,
@@ -540,6 +585,7 @@ export const eclairageData = [
     "Ecart ": -9,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 9,
     "puissance\n en W ": 44,
     "Pu en Kw": 0.044,
@@ -552,6 +598,7 @@ export const eclairageData = [
     "Ecart ": -5,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 44,
     "Pu en Kw": 0.044,
@@ -564,6 +611,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 6,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -576,6 +624,7 @@ export const eclairageData = [
     "Ecart ": -5,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 9,
     "puissance\n en W ": 44,
     "Pu en Kw": 0.044,
@@ -588,6 +637,7 @@ export const eclairageData = [
     "Ecart ": -3,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 6,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -600,6 +650,7 @@ export const eclairageData = [
     "Ecart ": -5,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 10,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -612,6 +663,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 14,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -624,6 +676,7 @@ export const eclairageData = [
     "Ecart ": -7,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 27,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -636,6 +689,7 @@ export const eclairageData = [
     "Ecart ": -13,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 4,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -648,6 +702,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -660,6 +715,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": null,
     "puissance\n en W ": null,
     "Pu en Kw": null,
@@ -672,6 +728,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Zone Confection",
     "Qtité ": 1,
     "puissance\n en W ": 55,
     "Pu en Kw": 0.055,
@@ -684,6 +741,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Service maintenance",
     "Qtité ": 22,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -696,6 +754,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Service maintenance",
     "Qtité ": 1,
     "puissance\n en W ": 55,
     "Pu en Kw": 0.055,
@@ -708,6 +767,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Service maintenance",
     "Qtité ": 1,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -720,6 +780,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Service maintenance",
     "Qtité ": 1,
     "puissance\n en W ": 18,
     "Pu en Kw": 0.018,
@@ -732,6 +793,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Service maintenance",
     "Qtité ": 1,
     "puissance\n en W ": 18,
     "Pu en Kw": 0.018,
@@ -744,6 +806,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Service maintenance",
     "Qtité ": null,
     "puissance\n en W ": null,
     "Pu en Kw": null,
@@ -756,6 +819,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Magasin produit fini",
     "Qtité ": 26,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -768,6 +832,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -780,6 +845,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 1,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -792,6 +858,7 @@ export const eclairageData = [
     "Ecart ": -1,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 2,
     "puissance\n en W ": 55,
     "Pu en Kw": 0.055,
@@ -804,6 +871,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 2,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -816,6 +884,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": null,
     "puissance\n en W ": null,
     "Pu en Kw": 0,
@@ -828,6 +897,7 @@ export const eclairageData = [
     "Ecart ": -2,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 1,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -840,6 +910,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 7,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -852,6 +923,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 4,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -864,6 +936,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Administration",
     "Qtité ": 5,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -876,6 +949,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Locaux sociaux",
     "Qtité ": 6,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -888,6 +962,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 3,
     "puissance\n en W ": 66,
     "Pu en Kw": 0.066,
@@ -900,6 +975,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 8,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -912,6 +988,7 @@ export const eclairageData = [
     "Ecart ": -7,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 2,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -924,6 +1001,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 1,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -936,6 +1014,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 12,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -948,6 +1027,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 1,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -960,6 +1040,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 1,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -972,6 +1053,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 1,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -984,6 +1066,7 @@ export const eclairageData = [
     "Ecart ": 1,
   },
   {
+    Emplacement: "locaux sociaux",
     "Qtité ": 2,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -996,6 +1079,7 @@ export const eclairageData = [
     "Ecart ": 0,
   },
   {
+    Emplacement: "Mezzanine",
     "Qtité ": 7,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,
@@ -1008,6 +1092,7 @@ export const eclairageData = [
     "Ecart ": -3,
   },
   {
+    Emplacement: "Mezzanine",
     "Qtité ": null,
     "puissance\n en W ": 36,
     "Pu en Kw": 0.036,

@@ -16,6 +16,8 @@ import {
 interface MachineData {
   Machine: string;
   Fonction: string;
+  Emplacemnt?: string;
+  Modele?: string;
   Marque?: string;
   "Pu en Kw": number;
   "Consommation Kwh": number;
@@ -69,7 +71,7 @@ export default function MachinesDetails({
 
   // Prepare chart data
   const chartData = data.map((item) => ({
-    name: item.Fonction,
+    name: item.Fonction || item.Emplacement || item.Modele,
     power: item["Consommation Kwh"],
     carbonImpact: item["Impact carbone en kgCO2e"],
   }));

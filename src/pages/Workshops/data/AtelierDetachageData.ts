@@ -1,7 +1,7 @@
 export const atelierDetachageData = [
   {
     "Machine ": "pd01",
-    "Fonction ": "POSTE DE DETACHAGE",
+    Fonction: "POSTE DE DETACHAGE",
     Marque: "COVEMAT 806",
     Voltage: 220,
     "Pu en W": 750,
@@ -17,7 +17,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "pd02",
-    "Fonction ": "POSTE DE DETACHAGE",
+    Fonction: "POSTE DE DETACHAGE",
     Marque: "COVEMAT C820",
     Voltage: 220,
     "Pu en W": 5000,
@@ -33,7 +33,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "TDT01",
-    "Fonction ": "TABLE DETACHAGE",
+    Fonction: "TABLE DETACHAGE",
     Marque: "BATTISTELLA",
     Voltage: 220,
     "Pu en W": 600,
@@ -49,7 +49,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "CHV02",
-    "Fonction ": "CHAUDIERE A VAPEUR ",
+    Fonction: "CHAUDIERE A VAPEUR ",
     Marque: "COVEMAT 250",
     Voltage: 220,
     "Pu en W": 5000,
@@ -65,7 +65,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "CL02",
-    "Fonction ": "CABINE LUMIERE",
+    Fonction: "CABINE LUMIERE",
     Marque: "EMI DEVELOPPEMENT",
     Voltage: 220,
     "Pu en W": 540,
@@ -81,7 +81,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "CL03",
-    "Fonction ": "CABINE LUMIERE",
+    Fonction: "CABINE LUMIERE",
     Marque: "EMI DEVELOPPEMENT",
     Voltage: 220,
     "Pu en W": 540,
@@ -97,7 +97,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "PSR07",
-    "Fonction ": "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR",
+    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR",
     Marque: "VEIT 4460",
     Voltage: 380,
     "Pu en W": 4400,
@@ -113,7 +113,7 @@ export const atelierDetachageData = [
   },
   {
     "Machine ": "FRF",
-    "Fonction ": "fer à repasser",
+    Fonction: "fer à repasser",
     Marque: "Inconnu",
     Voltage: 220,
     "Pu en W": 800,
