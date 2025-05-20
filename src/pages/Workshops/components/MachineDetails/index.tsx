@@ -124,7 +124,7 @@ export default function MachinesDetails({
                     />
                     <Bar
                       dataKey="power"
-                      name="Consommation (kwH)"
+                      name="Consommation (kwh)"
                       fill="#3b82f6"
                     />
                   </BarChart>
