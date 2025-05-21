@@ -68,9 +68,9 @@ export const zoneData = [
     },
     eclairage: {
       name: "Éclairage",
-      PU: 3.43,
-      consumption: 57444.66,
-      carboneImpact: 37339.03,
+      PU: 45.18,
+      consumption: 123335.94,
+      carboneImpact: 80168.36,
       machinesData: eclairageData,
     },
   },

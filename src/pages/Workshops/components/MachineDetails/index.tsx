@@ -75,7 +75,7 @@ export default function MachinesDetails({
       formatName(item.Fonction) ||
       formatName(item.Emplacement) ||
       formatName(item.Modele),
-    power: item["Consommation Kwh"],
+    power: item["Consommation totale en Kwh"] || item["Consommation Kwh"],
     carbonImpact: item["Impact carbone en kgCO2e"],
   }));
 
@@ -135,7 +135,7 @@ export default function MachinesDetails({
             {/* Second Chart: Function vs Carbon Impact */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2 text-gray-700">
-                Impact carbone (en kgCO2e)
+                Impact Carbone (en kgCO2e)
               </h3>
               <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
@@ -161,7 +161,7 @@ export default function MachinesDetails({
                     />
                     <Bar
                       dataKey="carbonImpact"
-                      name="Impact carbone (kgCO2e)"
+                      name="Impact Carbone (kgCO2e)"
                       fill="#10b981"
                     />
                   </BarChart>

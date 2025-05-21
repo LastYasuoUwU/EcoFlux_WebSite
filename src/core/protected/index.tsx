@@ -47,7 +47,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     if (isLoaded && isSignedIn) {
       const timer = setTimeout(() => {
         setShowLoader(false);
-      }, 8000); //8 seconds
+      }, 1000); //8 seconds
 
       // Clean up the timer if component unmounts
       return () => clearTimeout(timer);
