@@ -242,11 +242,6 @@ const CustomTooltip = ({
 // };
 
 const DashboardPage: React.FC = () => {
-  // Helper function to calculate days in a year
-  const getDaysInYear = (year: number): number => {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? 366 : 365;
-  };
-
   // Helper function to get days data for a specific year
   const getDaysForYear = (
     year: number
@@ -371,7 +366,7 @@ const DashboardPage: React.FC = () => {
           </p>
           {data.days && (
             <p className="text-gray-600 text-sm">
-              {`Nombre jours (avec HS): ${data.days}`}
+              {`Nombre de jours travaillés: ${data.days}`}
             </p>
           )}
           {data.comment && (

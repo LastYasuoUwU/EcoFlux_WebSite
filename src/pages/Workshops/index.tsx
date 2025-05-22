@@ -143,7 +143,7 @@ export default function WorkshopsManagement() {
       {/* Combined Table */}
       <div className="w-full max-w-6xl mb-16 bg-white p-8 rounded-xl shadow-md">
         <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">
-          Vue d'ensemble des ateliers
+          Vue d'ensemble des Ateliers
         </h2>
 
         <div className="overflow-x-auto">
