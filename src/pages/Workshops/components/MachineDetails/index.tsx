@@ -21,7 +21,7 @@ interface MachineData {
   Marque?: string;
   "Pu en Kw": number;
   "Consommation Kwh": number;
-  "Impact carbone en kgCO2e": number;
+  "Impact carbone en KgCo2e": number;
   [key: string]: any; // For other possible properties
 }
 
@@ -76,7 +76,7 @@ export default function MachinesDetails({
       formatName(item.Emplacement) ||
       formatName(item.Modele),
     power: item["Consommation totale en Kwh"] || item["Consommation Kwh"],
-    carbonImpact: item["Impact carbone en kgCO2e"],
+    carbonImpact: item["Impact carbone en KgCo2e"],
   }));
 
   return (
@@ -124,7 +124,7 @@ export default function MachinesDetails({
                     />
                     <Bar
                       dataKey="power"
-                      name="Consommation (kwh)"
+                      name="Consommation (Kwh)"
                       fill="#3b82f6"
                     />
                   </BarChart>
@@ -135,7 +135,7 @@ export default function MachinesDetails({
             {/* Second Chart: Function vs Carbon Impact */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-xl font-semibold mb-2 text-gray-700">
-                Impact Carbone (en kgCO2e)
+                Impact Carbone (en KgCo2e)
               </h3>
               <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
@@ -161,7 +161,7 @@ export default function MachinesDetails({
                     />
                     <Bar
                       dataKey="carbonImpact"
-                      name="Impact Carbone (kgCO2e)"
+                      name="Impact Carbone (KgCo2e)"
                       fill="#10b981"
                     />
                   </BarChart>
