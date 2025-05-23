@@ -28,6 +28,7 @@
       "@assets/*": ["src/assets/*"],
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     },
+    "esModuleInterop": true
   },
-  "include": ["vite.config.ts", "src", "vite-env.d.ts"]
+  "include": ["vite.config.ts", "src", "vite-env.d.ts","src/**/*.ts"]
 }
