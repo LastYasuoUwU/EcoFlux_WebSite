@@ -51,14 +51,10 @@ export default function WorkshopsManagement() {
 
   // Labels for the three metrics
   const metrics = [
-    { title: "Puissance en Kw", dataKey: "PU", color: "#0088FE" },
+    { title: "Puissance en kW", dataKey: "PU", color: "#0088FE" },
+    { title: "Consommation en kWh", dataKey: "consumption", color: "#00C49F" },
     {
-      title: "Consommation Annuelle en Kwh",
-      dataKey: "consumption",
-      color: "#00C49F",
-    },
-    {
-      title: "Impact carbone Annuel en KgCo2e",
+      title: "Impact carbone en kgCO2e",
       dataKey: "carboneImpact",
       color: "#FF8042",
     },
@@ -155,12 +151,12 @@ export default function WorkshopsManagement() {
             <thead>
               <tr className="bg-gray-100">
                 <th className="py-2 px-4 border text-left">Zone</th>
-                <th className="py-2 px-4 border text-right">Puissance en Kw</th>
+                <th className="py-2 px-4 border text-right">Puissance en kW</th>
                 <th className="py-2 px-4 border text-right">
-                  Consommation Annuelle en Kwh
+                  Consommation en kWh
                 </th>
                 <th className="py-2 px-4 border text-right">
-                  Impact carbone en KgCo2e
+                  Impact carbone en kgCO2e
                 </th>
                 <th className="py-2 px-4 border text-center">Actions</th>
               </tr>

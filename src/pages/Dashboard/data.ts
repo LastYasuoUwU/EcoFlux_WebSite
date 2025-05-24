@@ -137,7 +137,7 @@ export const dashboardData = {
     [],
     [],
     [],
-    ["Impact carbone en KgCo2e"],
+    ["Impact carbone en kgCO2e"],
     [
       "2,015",
       "2,016",
@@ -229,7 +229,7 @@ export const dashboardData = {
       "606",
     ],
     [
-      "Consommation électricité en [Kwh]",
+      "Consommation électricité en [KWh]",
       "",
       "",
       "",
