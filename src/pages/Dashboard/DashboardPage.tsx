@@ -228,9 +228,12 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="w-full p-6 space-y-8">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Tableau de bord de la consommation d'électricité
-      </h1>
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          Mesures électriques sous tension
+        </h1>
+      </div>
       <MeterDashboard />
 
       {/* Monthly Consumption Chart */}

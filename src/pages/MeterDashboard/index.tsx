@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Activity, Zap, AlertCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Activity, Zap } from "lucide-react";
 
 interface Reading {
   voltage: number;
@@ -11,8 +11,6 @@ interface Reading {
 
 export default function MeterDashboard() {
   const [reading, setReading] = useState<Reading | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [history, setHistory] = useState<Reading[]>([]);
 
   useEffect(() => {
     // Mock data generator
@@ -27,22 +25,12 @@ export default function MeterDashboard() {
     // Generate initial reading
     const initialReading = generateMockReading();
     setReading(initialReading);
-    setHistory([initialReading]);
 
     // Simulate real-time data updates
     const interval = setInterval(() => {
       const newReading = generateMockReading();
 
       setReading(newReading);
-
-      // Keep last 50 readings for trend
-      setHistory((prev) => [...prev.slice(-49), newReading]);
-
-      // Occasionally simulate errors (3% chance)
-      if (Math.random() < 0.03) {
-        setError("Sensor reading anomaly detected");
-        setTimeout(() => setError(null), 3000);
-      }
     }, 1000); // Update every second
 
     return () => {
@@ -68,26 +56,8 @@ export default function MeterDashboard() {
   const voltageStatus = reading ? getVoltageStatus(reading.voltage) : null;
 
   return (
-    <div className=" bg-white p-4 rounded shadow-lg">
+    <div className=" bg-white py-4 px-1 rounded shadow-lg">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Mesures électriques sous tension
-          </h1>
-        </div>
-
-        {/* useless Error Alert */}
-        {/* {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center justify-center gap-3 max-w-md mx-auto">
-            <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
-            <div>
-              <p className="text-red-800 font-medium">Alert</p>
-              <p className="text-red-600 text-sm">{error}</p>
-            </div>
-          </div>
-        )} */}
-
         {/* Main Dashboard Layout */}
         <div className="relative flex items-center justify-center min-h-96">
           {/* Left Side Metrics */}
@@ -123,7 +93,7 @@ export default function MeterDashboard() {
             {/* Current Card */}
             <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500 w-80">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-semibold text-gray-700">Current</h3>
+                <h3 className="text-lg font-semibold text-gray-700">Courant</h3>
                 <Activity className="h-6 w-6 text-green-500" />
               </div>
               {reading ? (
@@ -156,7 +126,9 @@ export default function MeterDashboard() {
             {/* Power Card */}
             <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500 w-80">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-semibold text-gray-700">Power</h3>
+                <h3 className="text-lg font-semibold text-gray-700">
+                  Puissance
+                </h3>
                 <Zap className="h-6 w-6 text-purple-500" />
               </div>
               {reading ? (
@@ -174,7 +146,7 @@ export default function MeterDashboard() {
             <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500 w-80">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-lg font-semibold text-gray-700">
-                  Frequency
+                  Fréquence
                 </h3>
                 <Activity className="h-6 w-6 text-orange-500" />
               </div>
