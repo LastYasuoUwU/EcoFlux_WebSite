@@ -80,8 +80,109 @@ export default function MachinesDetails({
   }));
 
   return (
+    // <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    //   <div className="bg-white rounded-lg shadow-xl w-full max-w-6xl h-3/4 max-h-3xl overflow-y-auto p-6 m-4">
+    //     <div className="bg-white flex justify-between items-center mb-6">
+    //       <h2 className="text-2xl font-bold text-gray-800">{machineName}</h2>
+    //       <button
+    //         onClick={onClose}
+    //         className="text-gray-500 hover:text-gray-700 transition-colors"
+    //       >
+    //         <XCircle size={24} />
+    //       </button>
+    //     </div>
+
+    //     <div className="grid md:grid-cols-1 gap-6">
+    //       {/* Charts Section */}
+    //       <div className="space-y-6 ">
+    //         {/* First Chart: Function vs Power */}
+    //         <div className="bg-gray-50 p-4 rounded-lg">
+    //           <h3 className="text-xl font-semibold mb-2 text-gray-700">
+    //             Consommation (en Kwh)
+    //           </h3>
+    //           <div className="h-80">
+    //             <ResponsiveContainer width="100%" height="100%">
+    //               <BarChart
+    //                 data={chartData}
+    //                 margin={{ top: 10, right: 10, left: 10, bottom: 40 }}
+    //               >
+    //                 <CartesianGrid strokeDasharray="3 3" />
+    //                 <XAxis
+    //                   dataKey="name"
+    //                   angle={-45}
+    //                   textAnchor="end"
+    //                   height={110}
+    //                   tick={{ fontSize: 12 }}
+    //                 />
+    //                 <YAxis />
+    //                 <Tooltip />
+    //                 <Legend
+    //                   align="left"
+    //                   verticalAlign="bottom"
+    //                   height={36}
+    //                   wrapperStyle={{ bottom: -10 }}
+    //                 />
+    //                 <Bar
+    //                   dataKey="power"
+    //                   name="Consommation (kwh)"
+    //                   fill="#3b82f6"
+    //                 />
+    //               </BarChart>
+    //             </ResponsiveContainer>
+    //           </div>
+    //         </div>
+
+    //         {/* Second Chart: Function vs Carbon Impact */}
+    //         <div className="bg-gray-50 p-4 rounded-lg">
+    //           <h3 className="text-xl font-semibold mb-2 text-gray-700">
+    //             Impact Carbone (en kgCO2e)
+    //           </h3>
+    //           <div className="h-80">
+    //             <ResponsiveContainer width="100%" height="100%">
+    //               <BarChart
+    //                 data={chartData}
+    //                 margin={{ top: 10, right: 10, left: 10, bottom: 40 }}
+    //               >
+    //                 <CartesianGrid strokeDasharray="3 3" />
+    //                 <XAxis
+    //                   dataKey="name"
+    //                   angle={-45}
+    //                   textAnchor="end"
+    //                   height={110}
+    //                   tick={{ fontSize: 12 }}
+    //                 />
+    //                 <YAxis />
+    //                 <Tooltip />
+    //                 <Legend
+    //                   align="left"
+    //                   verticalAlign="bottom"
+    //                   height={36}
+    //                   wrapperStyle={{ bottom: -10 }}
+    //                 />
+    //                 <Bar
+    //                   dataKey="carbonImpact"
+    //                   name="Impact Carbone (kgCO2e)"
+    //                   fill="#10b981"
+    //                 />
+    //               </BarChart>
+    //             </ResponsiveContainer>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+
+    //     <div className="flex justify-end w-full">
+    //       <button
+    //         onClick={onClose}
+    //         className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm mt-8"
+    //       >
+    //         Fermer
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl h-3/4 max-h-3xl overflow-y-auto p-6 m-4">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-6xl h-3/4 max-h-3xl overflow-y-auto p-6 m-4">
         <div className="bg-white flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">{machineName}</h2>
           <button
@@ -112,7 +213,50 @@ export default function MachinesDetails({
                       angle={-45}
                       textAnchor="end"
                       height={110}
-                      tick={{ fontSize: 12 }}
+                      interval={0}
+                      tick={({ x, y, payload }) => {
+                        const words = payload.value.split(" ");
+                        if (words.length > 2) {
+                          const mid = Math.ceil(words.length / 2);
+                          const line1 = words.slice(0, mid).join(" ");
+                          const line2 = words.slice(mid).join(" ");
+                          return (
+                            <g transform={`translate(${x},${y})`}>
+                              <text
+                                x={0}
+                                y={0}
+                                dy={-6}
+                                textAnchor="end"
+                                fill="#666"
+                                fontSize="12"
+                                transform="rotate(-45)"
+                              >
+                                <tspan x={0} dy={0}>
+                                  {line1}
+                                </tspan>
+                                <tspan x={0} dy={14}>
+                                  {line2}
+                                </tspan>
+                              </text>
+                            </g>
+                          );
+                        }
+                        return (
+                          <g transform={`translate(${x},${y})`}>
+                            <text
+                              x={0}
+                              y={0}
+                              dy={0}
+                              textAnchor="end"
+                              fill="#666"
+                              fontSize="12"
+                              transform="rotate(-45)"
+                            >
+                              {payload.value}
+                            </text>
+                          </g>
+                        );
+                      }}
                     />
                     <YAxis />
                     <Tooltip />
@@ -149,7 +293,50 @@ export default function MachinesDetails({
                       angle={-45}
                       textAnchor="end"
                       height={110}
-                      tick={{ fontSize: 12 }}
+                      interval={0}
+                      tick={({ x, y, payload }) => {
+                        const words = payload.value.split(" ");
+                        if (words.length > 2) {
+                          const mid = Math.ceil(words.length / 2);
+                          const line1 = words.slice(0, mid).join(" ");
+                          const line2 = words.slice(mid).join(" ");
+                          return (
+                            <g transform={`translate(${x},${y})`}>
+                              <text
+                                x={0}
+                                y={0}
+                                dy={-6}
+                                textAnchor="end"
+                                fill="#666"
+                                fontSize="12"
+                                transform="rotate(-45)"
+                              >
+                                <tspan x={0} dy={0}>
+                                  {line1}
+                                </tspan>
+                                <tspan x={0} dy={14}>
+                                  {line2}
+                                </tspan>
+                              </text>
+                            </g>
+                          );
+                        }
+                        return (
+                          <g transform={`translate(${x},${y})`}>
+                            <text
+                              x={0}
+                              y={0}
+                              dy={0}
+                              textAnchor="end"
+                              fill="#666"
+                              fontSize="12"
+                              transform="rotate(-45)"
+                            >
+                              {payload.value}
+                            </text>
+                          </g>
+                        );
+                      }}
                     />
                     <YAxis />
                     <Tooltip />

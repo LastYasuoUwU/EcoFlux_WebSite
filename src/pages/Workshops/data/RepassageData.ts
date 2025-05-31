@@ -1,7 +1,7 @@
 export const repassageData = [
   {
     "Machine ": "PSR03",
-    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR",
+    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR 03",
     Marque: "VEIT 4460",
     Voltage: 380,
     "Pu en W": 4400,
@@ -17,8 +17,8 @@ export const repassageData = [
     "Tarif MAD/Kwh/an": 8766.12,
   },
   {
-    "Machine ": "FRF",
-    Fonction: "fer à repasser",
+    "Machine ": "FRF 03",
+    Fonction: "fer à repasser 03",
     Marque: null,
     Voltage: 220,
     "Pu en W": 800,
@@ -35,7 +35,7 @@ export const repassageData = [
   },
   {
     "Machine ": "PSR04",
-    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR",
+    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR 04",
     Marque: "VEIT 4460",
     Voltage: 380,
     "Pu en W": 4400,
@@ -51,8 +51,8 @@ export const repassageData = [
     "Tarif MAD/Kwh/an": 8766.12,
   },
   {
-    "Machine ": "FRF",
-    Fonction: "fer à repasser",
+    "Machine ": "FRF 04",
+    Fonction: "fer à repasser 04",
     Marque: null,
     Voltage: 220,
     "Pu en W": 800,
@@ -69,7 +69,7 @@ export const repassageData = [
   },
   {
     "Machine ": "PSR05",
-    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR",
+    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR 05",
     Marque: "VEIT 4460",
     Voltage: 380,
     "Pu en W": 4400,
@@ -85,8 +85,8 @@ export const repassageData = [
     "Tarif MAD/Kwh/an": 8766.12,
   },
   {
-    "Machine ": "FRF",
-    Fonction: "fer à repasser",
+    "Machine ": "FRF 05",
+    Fonction: "fer à repasser 05",
     Marque: null,
     Voltage: 220,
     "Pu en W": 800,
@@ -103,7 +103,7 @@ export const repassageData = [
   },
   {
     "Machine ": "PSR06",
-    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR",
+    Fonction: "POSTE DE REPASSAGE AVEC GENERTAEUR DE VAPEUR 06",
     Marque: "VEIT 4460",
     Voltage: 380,
     "Pu en W": 4400,
@@ -119,8 +119,8 @@ export const repassageData = [
     "Tarif MAD/Kwh/an": 8766.12,
   },
   {
-    "Machine ": "FRF",
-    Fonction: "fer à repasser",
+    "Machine ": "FRF 06",
+    Fonction: "fer à repasser 06",
     Marque: null,
     Voltage: 220,
     "Pu en W": 800,
