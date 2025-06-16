@@ -777,12 +777,11 @@ const MeterDashboard: React.FC = () => {
         <div className="bg-white rounded-xl shadow-lg p-8 text-center max-w-md">
           <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-xl font-semibold text-gray-900 mb-2">Connexion a échoué</h2>
-          <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={startRealTimeUpdates}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
           >
-            Retry Connection
+            Réssayer la connexion
           </button>
         </div>
       </div>
@@ -792,15 +791,6 @@ const MeterDashboard: React.FC = () => {
   const formatValue = (value: number | undefined, unit: string = "", decimals: number = 2): string => {
     if (value === undefined || value === null) return "N/A";
     return `${value.toFixed(decimals)} ${unit}`.trim();
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'active': return 'bg-green-100 text-green-800';
-      case 'warning': return 'bg-yellow-100 text-yellow-800';
-      case 'error': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
   };
 
   // Chart colors
@@ -815,7 +805,7 @@ const MeterDashboard: React.FC = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-3 border border-gray-300 rounded-lg shadow-lg">
-          <p className="text-sm font-medium text-gray-600">{`Time: ${label}`}</p>
+          <p className="text-sm font-medium text-gray-600">{`Temps: ${label}`}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {`${entry.dataKey}: ${entry.value?.toFixed(2)} ${getUnit(entry.dataKey)}`}
@@ -849,7 +839,7 @@ const MeterDashboard: React.FC = () => {
               <Zap className="h-8 w-8 text-blue-600" />
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Moniteur de données électriques</h1>
-                <p className="text-gray-600">Mesures du système électrique en temps réel</p>
+                <p className="text-gray-600">Mesures du consommation électrique en temps réel</p>
               </div>
             </div>
             <div className="text-right">
@@ -861,7 +851,7 @@ const MeterDashboard: React.FC = () => {
                     <WifiOff className="h-5 w-5 text-red-500" />
                   )}
                   <span className={`text-sm font-medium ${isConnected ? 'text-green-600' : 'text-red-600'}`}>
-                    {isConnected ? 'Connected' : 'Disconnected'}
+                    {isConnected ? 'Connecté' : 'Déconnecté'}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -871,21 +861,6 @@ const MeterDashboard: React.FC = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex items-center space-x-4">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(data?.status || 'unknown')}`}>
-                  {(data?.status || 'UNKNOWN').toUpperCase()}
-                </span>
-                {lastUpdated && (
-                  <span className="text-xs text-gray-500">
-                    actualisé: {lastUpdated.toLocaleTimeString()}
-                  </span>
-                )}
-              </div>
-              {error && (
-                <div className="mt-2 text-xs text-red-600 bg-red-50 px-2 py-1 rounded">
-                  {error}
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -911,6 +886,7 @@ const MeterDashboard: React.FC = () => {
                   <YAxis 
                     domain={['dataMin - 10', 'dataMax + 10']}
                     tick={{ fontSize: 10 }}
+                    tickFormatter={(value) => value.toFixed(2)}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line 
@@ -960,6 +936,7 @@ const MeterDashboard: React.FC = () => {
                   <YAxis 
                     domain={['dataMin - 5', 'dataMax + 5']}
                     tick={{ fontSize: 10 }}
+                    tickFormatter={(value) => value.toFixed(2)}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line 
@@ -1009,6 +986,7 @@ const MeterDashboard: React.FC = () => {
                   <YAxis 
                     domain={['dataMin - 10', 'dataMax + 10']}
                     tick={{ fontSize: 10 }}
+                    tickFormatter={(value) => value.toFixed(2)}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line 
@@ -1060,14 +1038,15 @@ const MeterDashboard: React.FC = () => {
                     orientation="left"
                     domain={[49, 51]}
                     tick={{ fontSize: 10 }}
-                    label={{ value: 'Frequency (Hz)', angle: -90, position: 'insideLeft' }}
+                    label={{ value: 'Fréquence (Hz)', angle: -90, position: 'insideLeft' }}
+                    tickFormatter={(value) => value.toFixed(2)}
                   />
                   <YAxis 
                     yAxisId="pf"
                     orientation="right"
                     domain={[0, 1]}
                     tick={{ fontSize: 10 }}
-                    label={{ value: 'Power Factor', angle: 90, position: 'insideRight' }}
+                    label={{ value: 'Facteur de puissance', angle: 90, position: 'insideRight' }}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line 
@@ -1103,7 +1082,7 @@ const MeterDashboard: React.FC = () => {
             </div>
             <div className="space-y-4">
               <div className="bg-purple-50 rounded-lg p-4">
-                <h3 className="font-medium text-purple-900 mb-3">Tensions Simples</h3>
+                <h3 className="font-medium text-purple-900 mb-3">Tensions Composées</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-700">U12:</span>
@@ -1121,7 +1100,7 @@ const MeterDashboard: React.FC = () => {
               </div>
               
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-medium text-blue-900 mb-3">Tensions Composées</h3>
+                <h3 className="font-medium text-blue-900 mb-3">Tensions Simples</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-700">V1:</span>
@@ -1139,7 +1118,7 @@ const MeterDashboard: React.FC = () => {
               </div>
 
               <div className="bg-green-50 rounded-lg p-4">
-                <h3 className="font-medium text-green-900 mb-3">Tension du Système</h3>
+                <h3 className="font-medium text-green-900 mb-3">Tensions du Système</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-700">Usys:</span>
@@ -1194,7 +1173,7 @@ const MeterDashboard: React.FC = () => {
               <div className="bg-teal-50 rounded-lg p-4">
                 <h3 className="font-medium text-teal-900 mb-3">Fréquence</h3>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">Frequency:</span>
+                  <span className="text-gray-700">Fréquence:</span>
                   <span className="font-mono font-medium text-lg">{formatValue(data?.FREQUENCE, "Hz")}</span>
                 </div>
               </div>
@@ -1234,7 +1213,7 @@ const MeterDashboard: React.FC = () => {
                     <span className="font-mono font-medium">{formatValue(data?.Ea_plus, "kWh")}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Hour Counter:</span>
+                    <span className="text-gray-700">Compteur Horaire Total:</span>
                     <span className="font-mono font-medium">{formatValue(data?.compteur_horaire, "h", 1)}</span>
                   </div>
                 </div>

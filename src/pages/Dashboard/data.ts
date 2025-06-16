@@ -25,6 +25,7 @@ export const dashboardData = {
       "66,236",
       "56,161",
       "60,190",
+      "66,580",
       "",
       "",
       "",
@@ -32,8 +33,7 @@ export const dashboardData = {
       "",
       "",
       "",
-      "",
-      "127,571",
+      "310,502",
     ],
     [
       "2024",
@@ -162,7 +162,7 @@ export const dashboardData = {
       "548925",
       "540343.7",
       "504572.25",
-      "158549.3",
+      "201826.3",
     ],
     [
       "Jours de données carbone",
@@ -244,7 +244,7 @@ export const dashboardData = {
       "844,500",
       "831,298",
       "776,265",
-      "243,922",
+      "310,502",
     ],
     [
       "Jours de données consommation",
