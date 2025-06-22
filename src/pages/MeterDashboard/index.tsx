@@ -6,7 +6,13 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
   ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
   AreaChart,
   Area,
 } from "recharts";
@@ -14,68 +20,22 @@ import {
   Zap,
   Activity,
   Power,
-  Gauge,
   TrendingUp,
+  Clock,
   Wifi,
   WifiOff,
-  Clock,
   AlertTriangle,
-  BarChart3,
+  Gauge,
 } from "lucide-react";
 
-interface ElectricalData {
-  id?: number;
-  timestamp: string;
-  compteur_horaire?: number;
-  U12?: number;
-  U23?: number;
-  U31?: number;
-  V1?: number;
-  V2?: number;
-  V3?: number;
-  FREQUENCE?: number;
-  I1?: number;
-  I2?: number;
-  I3?: number;
-  In?: number;
-  Ptot?: number;
-  Qtot?: number;
-  Stot?: number;
-  Ea_plus?: number;
-  Isys?: number;
-  Usys?: number;
-  Vsys?: number;
-  FPtot2?: number;
-  status: string;
-}
-
-interface ChartDataPoint {
-  time: string;
-  timestamp: number;
-  U12?: number;
-  U23?: number;
-  U31?: number;
-  V1?: number;
-  V2?: number;
-  V3?: number;
-  I1?: number;
-  I2?: number;
-  I3?: number;
-  Ptot?: number;
-  Qtot?: number;
-  Stot?: number;
-  FREQUENCE?: number;
-  FPtot2?: number;
-}
-
-const MeterDashboard: React.FC = () => {
-  const [data, setData] = useState<ElectricalData | null>(null);
-  const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
+const MetricDashboard: React.FC = () => {
+  const [data, setData] = useState(null);
+  const [chartData, setChartData] = useState([]);
   const [isConnected, setIsConnected] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const [totalEnergyCounter, setTotalEnergyCounter] = useState<number>(2480.7);
+  const [totalEnergyCounter, setTotalEnergyCounter] = useState<number>(24.8);
   const [hourCounter, setHourCounter] = useState<number>(8760);
 
   // Configuration
@@ -83,7 +43,7 @@ const MeterDashboard: React.FC = () => {
   const MAX_CHART_POINTS = 60; // Keep last 60 data points (1 minute at 1sec interval)
 
   // Generate realistic electrical data for Morocco
-  const generateElectricalData = (): ElectricalData => {
+  const generateElectricalData = () => {
     const now = new Date();
     const timeOfDay = now.getHours() + now.getMinutes() / 60;
 
@@ -184,7 +144,7 @@ const MeterDashboard: React.FC = () => {
       const currentConsumption = fetchedData.Ptot;
 
       // Add to chart data
-      const newChartPoint: ChartDataPoint = {
+      const newChartPoint = {
         time: new Date(fetchedData.timestamp).toLocaleTimeString(),
         timestamp: new Date(fetchedData.timestamp).getTime(),
         U12: fetchedData.U12,
@@ -202,6 +162,9 @@ const MeterDashboard: React.FC = () => {
         FREQUENCE: fetchedData.FREQUENCE,
         FPtot2: fetchedData.FPtot2,
         Ea_plus: fetchedData.Ea_plus,
+        Usys: fetchedData.Usys,
+        Vsys: fetchedData.Vsys,
+        Isys: fetchedData.Isys,
         Consommation: currentConsumption,
       };
 
@@ -310,48 +273,61 @@ const MeterDashboard: React.FC = () => {
     return `${value.toFixed(decimals)} ${unit}`.trim();
   };
 
-  const chartColors = {
-    voltage: ["#06b6d4", "#8b5cf6", "#f59e0b"],
-    current: ["#ef4444", "#06b6d4", "#8b5cf6"],
-    consumption: "#10b981",
-  };
+  // Prepare data for charts
+  const powerData = chartData.map((d) => ({
+    time: d.time,
+    "P (kW)": d.Ptot,
+    "Q (kVAR)": d.Qtot,
+    "S (kVA)": d.Stot,
+  }));
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white/95 backdrop-blur-sm p-4 border border-white/20 rounded-xl shadow-2xl">
-          <p className="text-sm font-semibold text-gray-800 mb-2">{`Temps: ${label}`}</p>
-          {payload.map((entry: any, index: number) => (
-            <p
-              key={index}
-              className="text-sm font-medium"
-              style={{ color: entry.color }}
-            >
-              {`${entry.dataKey}: ${entry.value?.toFixed(2)} ${getUnit(
-                entry.dataKey
-              )}`}
-            </p>
-          ))}
+  const voltageData = chartData.map((d) => ({
+    time: d.time,
+    "U sys (V)": d.Usys,
+    "V sys (V)": d.Vsys,
+  }));
+
+  const electricdata = chartData.map((d) => ({
+    time: d.time,
+    "I1 (A)": d.I1,
+    "I2 (A)": d.I2,
+    "I3 (A)": d.I3,
+    "In (A)": d.In,
+    "I sys (A)": d.Isys,
+  }));
+
+  const frequencyData = chartData.map((d) => ({
+    time: d.time,
+    "Fréquence (Hz)": d.FREQUENCE,
+  }));
+
+  const currentDistribution = data
+    ? [
+        { name: "I1", value: data.I1 || 0, color: "#8884d8" },
+        { name: "I2", value: data.I2 || 0, color: "#82ca9d" },
+        { name: "I3", value: data.I3 || 0, color: "#ffc658" },
+        { name: "In", value: data.In || 0, color: "#ff7300" },
+      ]
+    : [];
+
+  const StatCard = ({ title, value, unit, icon: Icon, color }: any) => (
+    <div
+      className={`bg-gradient-to-br ${color} p-6 rounded-2xl shadow-lg border border-white/20 backdrop-blur-sm`}
+    >
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-white/80 text-sm font-medium">{title}</p>
+          <p className="text-white text-2xl font-bold mt-1">
+            {value?.toFixed(2)} <span className="text-lg">{unit}</span>
+          </p>
         </div>
-      );
-    }
-    return null;
-  };
-
-  const getUnit = (key: string): string => {
-    if (key.includes("U") || key.includes("V")) return "V";
-    if (key.includes("I")) return "A";
-    if (key === "Ptot" || key === "Consommation") return "kWh";
-    if (key === "Qtot") return "kVAR";
-    if (key === "Stot") return "kVA";
-    if (key === "FREQUENCE") return "Hz";
-    if (key === "FPtot2") return "";
-    if (key === "Ea_plus") return "kWh";
-    return "";
-  };
+        <Icon className="w-8 h-8 text-white/80" />
+      </div>
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -396,350 +372,450 @@ const MeterDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <StatCard
+            title="Consommation Totale"
+            value={data?.Ea_plus}
+            unit="kWh"
+            icon={Zap}
+            color="from-blue-600 to-blue-800"
+          />
+          <StatCard
+            title="Puissance Active"
+            value={data?.Ptot}
+            unit="kW"
+            icon={Power}
+            color="from-green-600 to-green-800"
+          />
+          <StatCard
+            title="Tension Système"
+            value={data?.Usys}
+            unit="V"
+            icon={TrendingUp}
+            color="from-purple-600 to-purple-800"
+          />
+          <StatCard
+            title="Fréquence"
+            value={data?.FREQUENCE}
+            unit="Hz"
+            icon={Activity}
+            color="from-orange-600 to-orange-800"
+          />
+        </div>
+
+        {/* Charts Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Power Chart */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+            <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900">
+              <Power className="w-5 h-5 mr-2 text-green-400" />
+              Puissance (P, Q, S)
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <AreaChart data={powerData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} />
+                <YAxis
+                  stroke="#9CA3AF"
+                  fontSize={12}
+                  tickFormatter={(value) => value.toFixed(2)}
+                />
+                <Tooltip
+                  contentStyle={{
+                    // backgroundColor: "#1F2937",
+                    border: "1px solid #374151",
+                    borderRadius: "8px",
+                    color: "#F9FAFB",
+                  }}
+                  formatter={(value: number) => value.toFixed(2)}
+                />
+                <Legend />
+                <Area
+                  type="monotone"
+                  dataKey="P (kW)"
+                  stackId="1"
+                  stroke="#10B981"
+                  fill="#10B981"
+                  fillOpacity={0.3}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="Q (kVAR)"
+                  stackId="2"
+                  stroke="#F59E0B"
+                  fill="#F59E0B"
+                  fillOpacity={0.3}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="S (kVA)"
+                  stackId="3"
+                  stroke="#8B5CF6"
+                  fill="#8B5CF6"
+                  fillOpacity={0.3}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+
           {/* Voltage Chart */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <div className="flex items-center mb-4">
-              <TrendingUp className="h-6 w-6 text-purple-600 mr-2" />
-              <h2 className="text-xl font-semibold text-gray-900">Tensions</h2>
-            </div>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis
-                    dataKey="time"
-                    tick={{ fontSize: 10 }}
-                    interval="preserveStartEnd"
-                  />
-                  <YAxis
-                    domain={["dataMin - 10", "dataMax + 10"]}
-                    tick={{ fontSize: 10 }}
-                    tickFormatter={(value) => value.toFixed(2)}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Line
-                    type="monotone"
-                    dataKey="V1"
-                    stroke={chartColors.voltage[0]}
-                    strokeWidth={2}
-                    dot={false}
-                    name="V1"
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="V2"
-                    stroke={chartColors.voltage[1]}
-                    strokeWidth={2}
-                    dot={false}
-                    name="V2"
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="V3"
-                    stroke={chartColors.voltage[2]}
-                    strokeWidth={2}
-                    dot={false}
-                    name="V3"
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+            <h3 className="mb-4 flex items-center text-xl font-semibold text-gray-900">
+              <TrendingUp className="w-5 h-5 mr-2 text-purple-400" />
+              Tensions du Système
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={voltageData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} />
+                <YAxis
+                  stroke="#9CA3AF"
+                  fontSize={12}
+                  tickFormatter={(value) => value.toFixed(2)}
+                />
+                <Tooltip
+                  contentStyle={{
+                    // backgroundColor: "#1F2937",
+                    border: "1px solid #374151",
+                    borderRadius: "8px",
+                    color: "#F9FAFB",
+                  }}
+                  formatter={(value: number) => value.toFixed(2)}
+                />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="U sys (V)"
+                  stroke="#8B5CF6"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="V sys (V)"
+                  stroke="#06B6D4"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
 
           {/* Current Chart */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+            <h3 className="mb-4 flex items-center text-xl font-semibold text-gray-900">
+              <Activity className="w-5 h-5 mr-2 text-yellow-400" />
+              Courants
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={electricdata.slice(-10)}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} />
+                <YAxis
+                  stroke="#9CA3AF"
+                  fontSize={12}
+                  tickFormatter={(value) => value.toFixed(2)}
+                />
+                <Tooltip
+                  contentStyle={{
+                    // backgroundColor: "#1F2937",
+                    border: "1px solid #374151",
+                    borderRadius: "8px",
+                    color: "#F9FAFB",
+                  }}
+                  formatter={(value: number) => value.toFixed(2)}
+                />
+                <Legend />
+                <Bar dataKey="I1 (A)" fill="#8884d8" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="I2 (A)" fill="#82ca9d" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="I3 (A)" fill="#ffc658" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="In (A)" fill="#ff7300" radius={[2, 2, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Current Distribution Pie Chart */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+            <h3 className=" mb-4 flex items-center text-xl font-semibold text-gray-900">
+              <Zap className="w-5 h-5 mr-2 text-blue-400" />
+              Distribution des Courants
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={currentDistribution}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  fill="#8884d8"
+                  dataKey="value"
+                  label={({ name, value }) => `${name}: ${value.toFixed(1)}A`}
+                >
+                  {currentDistribution.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    // backgroundColor: "#1F2937",
+                    border: "1px solid #374151",
+                    borderRadius: "8px",
+                    color: "#F9FAFB",
+                  }}
+                  formatter={(value: number) => value.toFixed(2) + " A"}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Frequency Monitor */}
+        <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+          <h3 className="mb-4 flex items-center text-xl font-semibold text-gray-900">
+            <Activity className="w-5 h-5 mr-2 text-orange-400" />
+            Surveillance de la Fréquence
+          </h3>
+          <ResponsiveContainer width="100%" height={200}>
+            <LineChart data={frequencyData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+              <XAxis dataKey="time" stroke="#9CA3AF" fontSize={12} />
+              <YAxis
+                domain={[49.5, 50.5]}
+                stroke="#9CA3AF"
+                fontSize={12}
+                tickFormatter={(value: number) => value.toFixed(2)}
+              />
+              <Tooltip
+                contentStyle={{
+                  // backgroundColor: "#1F2937",
+                  border: "1px solid #374151",
+                  borderRadius: "8px",
+                  color: "#F9FAFB",
+                }}
+                formatter={(value: number) => value.toFixed(2)}
+              />
+              <Line
+                type="monotone"
+                dataKey="Fréquence (Hz)"
+                stroke="#F59E0B"
+                strokeWidth={4}
+                dot={{ r: 6, fill: "#F59E0B" }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Voltage Measurements */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex items-center mb-4">
-              <Activity className="h-6 w-6 text-red-600 mr-2" />
-              <h2 className="text-xl font-semibold text-gray-900">Courants</h2>
+              <Activity className="h-6 w-6 text-purple-600 mr-2" />
+              <h2 className="text-xl font-semibold text-gray-900">Tensions</h2>
             </div>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis
-                    dataKey="time"
-                    tick={{ fontSize: 10 }}
-                    interval="preserveStartEnd"
-                  />
-                  <YAxis
-                    domain={["dataMin - 5", "dataMax + 5"]}
-                    tick={{ fontSize: 10 }}
-                    tickFormatter={(value) => value.toFixed(2)}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Line
-                    type="monotone"
-                    dataKey="I1"
-                    stroke={chartColors.current[0]}
-                    strokeWidth={2}
-                    dot={false}
-                    name="I1"
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="I2"
-                    stroke={chartColors.current[1]}
-                    strokeWidth={2}
-                    dot={false}
-                    name="I2"
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="I3"
-                    stroke={chartColors.current[2]}
-                    strokeWidth={2}
-                    dot={false}
-                    name="I3"
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+            <div className="space-y-4">
+              <div className="bg-purple-50 rounded-lg p-4">
+                <h3 className="font-medium text-purple-900 mb-3">
+                  Tensions Composées
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">U12:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.U12, "V")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">U23:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.U23, "V")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">U31:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.U31, "V")}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 rounded-lg p-4">
+                <h3 className="font-medium text-blue-900 mb-3">
+                  Tensions Simples
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">V1:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.V1, "V")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">V2:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.V2, "V")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">V3:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.V3, "V")}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-green-50 rounded-lg p-4">
+                <h3 className="font-medium text-green-900 mb-3">
+                  Tensions du Système
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Usys:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.Usys, "V")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Vsys:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.Vsys, "V")}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Consumption Chart */}
-          <div className="bg-white rounded-2xl shadow-2xl p-6 xl:col-span-2">
-            <div className="flex items-center mb-6">
-              <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg mr-3">
-                <BarChart3 className="h-6 w-6 text-white" />
-              </div>
+          {/* Current & Frequency */}
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="flex items-center mb-4">
+              <Gauge className="h-6 w-6 text-orange-600 mr-2" />
               <h2 className="text-xl font-semibold text-gray-900">
-                Consommation en Temps Réel
+                Courant et Fréquence
               </h2>
             </div>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={chartData}>
-                  <CartesianGrid stroke="#e0e0e0" strokeDasharray="3 3" />
-                  <XAxis dataKey="time" stroke="#888" />
-                  <YAxis
-                    stroke="#888"
-                    domain={["dataMin - 5", "dataMax + 5"]}
-                    tickFormatter={(value) => value.toFixed(2)}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Line
-                    type="monotone"
-                    dataKey="Consommation"
-                    stroke="#4f46e5"
-                    strokeWidth={3}
-                    dot={{ r: 4 }}
-                    activeDot={{ r: 6 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Voltage Measurements */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <div className="flex items-center mb-4">
-            <Activity className="h-6 w-6 text-purple-600 mr-2" />
-            <h2 className="text-xl font-semibold text-gray-900">Tensions</h2>
-          </div>
-          <div className="space-y-4">
-            <div className="bg-purple-50 rounded-lg p-4">
-              <h3 className="font-medium text-purple-900 mb-3">
-                Tensions Composées
-              </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-700">U12:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.U12, "V")}
-                  </span>
+            <div className="space-y-4">
+              <div className="bg-orange-50 rounded-lg p-4">
+                <h3 className="font-medium text-orange-900 mb-3">Courants</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">I1:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.I1, "A")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">I2:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.I2, "A")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">I3:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.I3, "A")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">In:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.In, "A")}
+                    </span>
+                  </div>
                 </div>
+              </div>
+
+              <div className="bg-indigo-50 rounded-lg p-4">
+                <h3 className="font-medium text-indigo-900 mb-3">
+                  Courant du Système
+                </h3>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">U23:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.U23, "V")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">U31:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.U31, "V")}
+                  <span className="text-gray-700">Isys:</span>
+                  <span className="font-mono font-medium text-lg">
+                    {formatValue(data?.Isys, "A")}
                   </span>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-blue-50 rounded-lg p-4">
-              <h3 className="font-medium text-blue-900 mb-3">
-                Tensions Simples
-              </h3>
-              <div className="space-y-2">
+              <div className="bg-teal-50 rounded-lg p-4">
+                <h3 className="font-medium text-teal-900 mb-3">Fréquence</h3>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">V1:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.V1, "V")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">V2:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.V2, "V")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">V3:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.V3, "V")}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-green-50 rounded-lg p-4">
-              <h3 className="font-medium text-green-900 mb-3">
-                Tensions du Système
-              </h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Usys:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.Usys, "V")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Vsys:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.Vsys, "V")}
+                  <span className="text-gray-700">Fréquence:</span>
+                  <span className="font-mono font-medium text-lg">
+                    {formatValue(data?.FREQUENCE, "Hz")}
                   </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Current & Frequency */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <div className="flex items-center mb-4">
-            <Gauge className="h-6 w-6 text-orange-600 mr-2" />
-            <h2 className="text-xl font-semibold text-gray-900">
-              Courant et Fréquence
-            </h2>
-          </div>
-          <div className="space-y-4">
-            <div className="bg-orange-50 rounded-lg p-4">
-              <h3 className="font-medium text-orange-900 mb-3">Courants</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-700">I1:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.I1, "A")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">I2:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.I2, "A")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">I3:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.I3, "A")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">In:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.In, "A")}
-                  </span>
+          {/* Power & Energy */}
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="flex items-center mb-4">
+              <Power className="h-6 w-6 text-green-600 mr-2" />
+              <h2 className="text-xl font-semibold text-gray-900">
+                Puissance et Consommation
+              </h2>
+            </div>
+            <div className="space-y-4">
+              <div className="bg-green-50 rounded-lg p-4">
+                <h3 className="font-medium text-green-900 mb-3">Puissance</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Ptot:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.Ptot, "kW")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Qtot:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.Qtot, "kVAR")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Stot:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.Stot, "kVA")}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-indigo-50 rounded-lg p-4">
-              <h3 className="font-medium text-indigo-900 mb-3">
-                Courant du Système
-              </h3>
-              <div className="flex justify-between">
-                <span className="text-gray-700">Isys:</span>
-                <span className="font-mono font-medium text-lg">
-                  {formatValue(data?.Isys, "A")}
-                </span>
-              </div>
-            </div>
-
-            <div className="bg-teal-50 rounded-lg p-4">
-              <h3 className="font-medium text-teal-900 mb-3">Fréquence</h3>
-              <div className="flex justify-between">
-                <span className="text-gray-700">Fréquence:</span>
-                <span className="font-mono font-medium text-lg">
-                  {formatValue(data?.FREQUENCE, "Hz")}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Power & Energy */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <div className="flex items-center mb-4">
-            <Power className="h-6 w-6 text-green-600 mr-2" />
-            <h2 className="text-xl font-semibold text-gray-900">
-              Puissance et Consommation
-            </h2>
-          </div>
-          <div className="space-y-4">
-            <div className="bg-green-50 rounded-lg p-4">
-              <h3 className="font-medium text-green-900 mb-3">Puissance</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Ptot:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.Ptot, "kW")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Qtot:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.Qtot, "kVAR")}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Stot:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.Stot, "kVA")}
-                  </span>
+              <div className="bg-yellow-50 rounded-lg p-4">
+                <h3 className="font-medium text-yellow-900 mb-3">
+                  Consommation et Compteur Horaire Total{" "}
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">Ea+:</span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.Ea_plus, "kWh", 2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-700">
+                      Compteur Horaire Total:
+                    </span>
+                    <span className="font-mono font-medium">
+                      {formatValue(data?.compteur_horaire, "h", 1)}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-yellow-50 rounded-lg p-4">
-              <h3 className="font-medium text-yellow-900 mb-3">
-                Consommation et Compteur Horaire Total{" "}
-              </h3>
-              <div className="space-y-2">
+              <div className="bg-red-50 rounded-lg p-4">
+                <h3 className="font-medium text-red-900 mb-3">
+                  Facteur de Puissance
+                </h3>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">Ea+:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.Ea_plus, "kWh")}
+                  <span className="text-gray-700">FPtot2:</span>
+                  <span className="font-mono font-medium text-lg">
+                    {formatValue(data?.FPtot2, "", 3)}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Compteur Horaire Total:</span>
-                  <span className="font-mono font-medium">
-                    {formatValue(data?.compteur_horaire, "h", 1)}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-red-50 rounded-lg p-4">
-              <h3 className="font-medium text-red-900 mb-3">
-                Facteur de Puissance
-              </h3>
-              <div className="flex justify-between">
-                <span className="text-gray-700">FPtot2:</span>
-                <span className="font-mono font-medium text-lg">
-                  {formatValue(data?.FPtot2, "", 3)}
-                </span>
               </div>
             </div>
           </div>
@@ -749,4 +825,4 @@ const MeterDashboard: React.FC = () => {
   );
 };
 
-export default MeterDashboard;
+export default MetricDashboard;
