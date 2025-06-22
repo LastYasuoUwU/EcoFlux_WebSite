@@ -38,6 +38,47 @@ const MetricDashboard: React.FC = () => {
   const [totalEnergyCounter, setTotalEnergyCounter] = useState<number>(24.8);
   const [hourCounter, setHourCounter] = useState<number>(8760);
 
+  const [consumptionData, setConsumptionData] = useState([]);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime((prev) => prev + 1);
+
+      // Generate realistic consumption data (simulating electrical consumption in Amperes)
+      const baseConsumption = 15; // Base consumption
+      const variation = Math.sin(Date.now() / 10000) * 5; // Sinusoidal variation
+      const randomNoise = (Math.random() - 0.5) * 2; // Random fluctuation
+      const totalConsumption = baseConsumption + variation + randomNoise;
+
+      setConsumptionData((prevData) => {
+        const newData = [
+          ...prevData,
+          {
+            time: new Date().toLocaleTimeString("fr-FR", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            }),
+            consumption: Math.max(0, totalConsumption), // Ensure non-negative values
+            timestamp: Date.now(),
+          },
+        ];
+
+        // Keep only last 30 data points (30 seconds of data)
+        return newData.slice(-30);
+      });
+    }, 1000);
+
+    const currentConsumption =
+      consumptionData.length > 0
+        ? consumptionData[consumptionData.length - 1].consumption
+        : 0;
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Configuration
   const FETCH_INTERVAL = 1000; // 1 second
   const MAX_CHART_POINTS = 60; // Keep last 60 data points (1 minute at 1sec interval)
@@ -535,37 +576,61 @@ const MetricDashboard: React.FC = () => {
             </ResponsiveContainer>
           </div>
 
-          {/* Current Distribution Pie Chart */}
+          {/* Consumption */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-            <h3 className=" mb-4 flex items-center text-xl font-semibold text-gray-900">
+            <h3 className="mb-4 flex items-center text-xl font-semibold text-gray-900">
               <Zap className="w-5 h-5 mr-2 text-blue-400" />
-              Distribution des Courants
+              Consommation Totale en Temps Réel
             </h3>
             <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={currentDistribution}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={100}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, value }) => `${name}: ${value.toFixed(1)}A`}
-                >
-                  {currentDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
+              <LineChart
+                data={consumptionData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="#374151"
+                  opacity={0.3}
+                />
+                <XAxis
+                  dataKey="time"
+                  stroke="#9CA3AF"
+                  fontSize={12}
+                  interval="preserveStartEnd"
+                  // tickFormatter={(value) => {
+                  //   // Show only minutes:seconds for cleaner display
+                  //   const parts = value.split(":");
+                  //   return `${parts[1]}:${parts[2]}`;
+                  // }}
+                />
+                <YAxis
+                  stroke="#9CA3AF"
+                  fontSize={12}
+                  domain={["dataMin - 1", "dataMax + 1"]}
+                  tickFormatter={(value) => `${value.toFixed(1)}A`}
+                />
                 <Tooltip
                   contentStyle={{
-                    // backgroundColor: "#1F2937",
+                    backgroundColor: "#1F2937",
                     border: "1px solid #374151",
                     borderRadius: "8px",
                     color: "#F9FAFB",
                   }}
-                  formatter={(value: number) => value.toFixed(2) + " A"}
+                  // labelFormatter={(label) => `Heure: ${label}`}
+                  formatter={(value) => [
+                    `${value.toFixed(2)} A`,
+                    "Consommation",
+                  ]}
                 />
-              </PieChart>
+                <Line
+                  type="monotone"
+                  dataKey="consumption"
+                  stroke="#3B82F6"
+                  strokeWidth={2}
+                  dot={{ fill: "#3B82F6", strokeWidth: 2, r: 3 }}
+                  activeDot={{ r: 5, fill: "#60A5FA" }}
+                />
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </div>
