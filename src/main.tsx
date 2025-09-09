@@ -4,7 +4,6 @@ import App from "./App";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AboutUs from "./pages/AboutUs";
 import Workshops from "./pages/Workshops";
-// import MachinesPage from "./pages/Machines";
 import PageUnderConstruction from "./pages/PageUnderCosntruction";
 import AuthenticationPage from "./pages/Authentication";
 import { ClerkProvider } from "@clerk/clerk-react";

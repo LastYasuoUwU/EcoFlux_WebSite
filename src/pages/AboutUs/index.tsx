@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { TeamData, teamData } from "./data";
 
 const AboutUs = () => {
-  const [membersData, setMembersData] = useState([]);
+  const [membersData, setMembersData] = useState<TeamData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -10,11 +10,9 @@ const AboutUs = () => {
       try {
         setIsLoading(true);
         // Simulate delay for demo purposes - remove in production
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-        const { data, error } = await supabase.from("aboutUs").select();
-        if (error) throw error;
-        setMembersData(data);
+        setMembersData(teamData);
       } catch (error) {
         console.error("Error fetching members:", error);
       } finally {
@@ -45,7 +43,7 @@ const AboutUs = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            {membersData.map((member, index) => (
+            {membersData.map((member: TeamData, index) => (
               <div
                 key={member.id}
                 className="transform transition duration-500 hover:scale-105 hover:shadow-2xl"
