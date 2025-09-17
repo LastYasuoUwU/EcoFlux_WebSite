@@ -1,210 +1,358 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import {
-  Activity,
-  BarChart3,
-  FileText,
   Zap,
-  TrendingDown,
-  Gauge,
-  Leaf,
-  Smartphone,
-  Plug,
+  Shield,
+  Layers,
+  Award,
+  Monitor,
+  BarChart3,
+  Settings,
+  Wifi,
+  Activity,
 } from "lucide-react";
-import DISPOSTIIVE from "../../assets/diris_a30.jpg";
 
-const MeasuringSystemPage: React.FC = () => {
+const DirisA30Page = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState("multimeasure");
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const features = [
+    {
+      icon: <Monitor className="w-8 h-8 text-blue-600" />,
+      title: "Ergonomie optimisée",
+      description:
+        "Interface claire avec écran rétroéclairé multi-affichage et accès direct aux fonctions, pour une utilisation simple et efficace.",
+    },
+    {
+      icon: <Shield className="w-8 h-8 text-green-600" />,
+      title: "Fiabilité de l'installation",
+      description:
+        "Intègre une fonction avancée de détection des erreurs de câblage, garantissant une mise en service sécurisée.",
+    },
+    {
+      icon: <Layers className="w-8 h-8 text-purple-600" />,
+      title: "Évolutivité et modularité",
+      description:
+        "Compatible avec des modules additionnels (communication, entrées/sorties numériques ou analogiques), offrant une flexibilité durable.",
+    },
+    {
+      icon: <Award className="w-8 h-8 text-orange-600" />,
+      title: "Conformité aux standards internationaux",
+      description:
+        "Certifié IEC 61557-12, assurant des performances mesurées et une fiabilité éprouvée dans les environnements industriels.",
+    },
+  ];
+
+  const controlButtons = [
+    { num: 1, desc: "Écran LCD rétroéclairé" },
+    {
+      num: 2,
+      desc: "Bouton poussoir des courants et de la fonction de correction du raccordement",
+    },
+    { num: 3, desc: "Bouton poussoir des tensions et de la fréquence" },
+    {
+      num: 4,
+      desc: "Bouton poussoir des puissances active, réactive, apparente et du facteur de puissance",
+    },
+    {
+      num: 5,
+      desc: "Bouton poussoir des valeurs maximales et moyennes des courants et puissances",
+    },
+    { num: 6, desc: "Bouton poussoir des harmoniques" },
+    {
+      num: 7,
+      desc: "Bouton poussoir des compteurs d'énergie électrique, horaire et impulsionnels",
+    },
+  ];
+
+  const functionalityTabs = {
+    multimeasure: {
+      title: "Multimesure",
+      icon: <Activity className="w-5 h-5" />,
+      items: [
+        "Courants",
+        "Tensions & Fréquence",
+        "Puissances",
+        "Facteurs de puissance",
+        "Kfactor",
+        "Températures",
+      ],
+    },
+    counting: {
+      title: "Comptage",
+      icon: <BarChart3 className="w-5 h-5" />,
+      items: [
+        "Énergie active: +/- kWh",
+        "Énergie réactive: +/- kvarh",
+        "Énergie apparente: kVAh",
+        "Horaire",
+      ],
+    },
+    harmonic: {
+      title: "Analyse harmonique",
+      icon: <Zap className="w-5 h-5" />,
+      items: ["Taux de distorsion harmonique", "Individuels jusqu'au 63e rang"],
+    },
+    curves: {
+      title: "Courbes de charges",
+      icon: <Monitor className="w-5 h-5" />,
+      items: [
+        "Puissances actives & réactives: ΣP+/-; ΣQ+/-",
+        "Tensions & fréquences: V1, V2, V3, U12, U23, U31, F",
+      ],
+    },
+    communications: {
+      title: "Communications",
+      icon: <Wifi className="w-5 h-5" />,
+      items: [
+        "RS485 (Modbus & Profibus-DP)",
+        "Ethernet (Modbus/TCP ou Modbus RTU)",
+        "Ethernet avec passerelle RS485 Modbus RTU sur TCP",
+      ],
+    },
+    io: {
+      title: "Entrées/Sorties",
+      icon: <Settings className="w-5 h-5" />,
+      items: [
+        "Comptage d'impulsions",
+        "Contrôle/commande d'appareillages",
+        "Report d'alarmes",
+        "Report d'impulsions",
+      ],
+    },
+  };
+
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-6">
-        <h1 className="text-3xl font-bold">Eco Flux</h1>
-        <p className="text-green-100 mt-2">
-          La plateforme intelligente pour la gestion énergétique industrielle
-        </p>
-        <p className="text-blue-100 mt-3 text-lg italic">
-          Transformez vos données énergétiques en un levier de performance et de
-          compétitivité.
-        </p>
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-100/30 to-purple-100/30"></div>
+        <div
+          className={`container mx-auto px-6 py-20 relative z-10 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              DIRIS A-30
+            </h1>
+            <p className="text-2xl mb-8 text-gray-700 font-medium">
+              Solution intelligente de mesure et de supervision électrique
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed mb-12">
+              Le DIRIS A-30 met à disposition toutes les données essentielles
+              pour optimiser l'efficacité énergétique et assurer un contrôle
+              fiable de la distribution. Grâce à son intégration avec des
+              logiciels spécialisés, l'analyse et l'exploitation des
+              informations peuvent se faire en toute simplicité.
+            </p>
+            <div className="flex justify-center">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Découvrir les fonctionnalités
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="p-6 space-y-6">
-        {/* Présentation générale */}
-        <section>
-          <h2 className="text-xl font-semibold text-gray-800 mb-3">
-            Présentation générale
+      {/* Features Section */}
+      <div className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">
+            Avantages du{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              DIRIS A-30
+            </span>
           </h2>
-          <p className="text-gray-600 leading-relaxed">
-            Eco Flux est une application web innovante, développée en interne
-            par TENMAR, qui permet de superviser, analyser et optimiser en temps
-            réel la consommation énergétique du Site.
-          </p>
-        </section>
-
-        {/* Fonctionnalités principales avec image */}
-        <section>
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            Fonctionnalités principales
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-6 items-center">
-            {/* Left column - Features */}
-            <div className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-blue-800 mb-2 flex items-center">
-                  <Activity className="h-5 w-5 mr-2" />
-                  Monitoring
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className={`bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-500 transform hover:scale-105 ${
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-center text-gray-800">
+                  {feature.title}
                 </h3>
-                <p className="text-gray-600 text-sm">
-                  Suivi en temps réel de la consommation d'énergie du matériels
-                  et machines, ateliers ou lignes de production, grâce à
-                  l'intégration de la centrale SOCOMEC DIRIS A30.
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {feature.description}
                 </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-purple-800 mb-2 flex items-center">
-                  <BarChart3 className="h-5 w-5 mr-2" />
-                  Visualisation intuitive
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Des tableaux de bord dynamiques et des graphiques clairs
-                  permettent une lecture rapide et précise des données
-                  énergétiques.
-                </p>
+      {/* Device Interface Section */}
+      <div className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">
+            Façade du{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              DIRIS A-30
+            </span>
+          </h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Actual Device Image */}
+              <div className="relative">
+                {/* <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-8 rounded-2xl shadow-xl border border-gray-300 hover:border-blue-400 transition-all duration-500">
+                  <div className="relative overflow-hidden rounded-xl">
+                    <div
+                      className="w-full rounded-xl shadow-lg bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 flex items-center justify-center text-white font-bold text-lg border-2 border-gray-400"
+                      style={{ minHeight: "350px" }}
+                    >
+                      <div className="text-center p-8">
+                        <div className="bg-gray-800 p-4 rounded-lg mb-6 border border-gray-600">
+                          <div className="bg-gradient-to-r from-green-400 to-blue-400 h-20 rounded flex items-center justify-center text-sm font-bold text-gray-900">
+                            LCD DISPLAY
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-2">
+                          {[1, 2, 3, 4, 5, 6, 7].map((num, index) => (
+                            <div
+                              key={num}
+                              className={`${index === 6 ? "col-span-4" : ""}`}
+                            >
+                              <button className="bg-gradient-to-br from-gray-600 to-gray-700 hover:from-blue-600 hover:to-blue-700 w-full h-10 rounded text-sm font-bold transition-all duration-300 border border-gray-500">
+                                {num}
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 text-xs text-gray-400">
+                          DIRIS A-30 Interface
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 text-center">
+                    <p className="text-gray-600 text-sm">
+                      Interface utilisateur avec écran LCD rétroéclairé et
+                      boutons de navigation
+                    </p>
+                  </div>
+                </div> */}
+                <img
+                  alt="DIRIS A30 image"
+                  src={
+                    "https://res.cloudinary.com/dbhv2ff2q/image/upload/v1757880971/DIRIS%20A30/pic1_obfnm9.png"
+                  }
+                />
+              </div>
+
+              {/* Controls Description */}
+              <div className="space-y-4">
+                {controlButtons.map((button, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        {button.num}
+                      </span>
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        {button.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Center - Image */}
-            <div className="flex justify-center">
+      {/* Architecture Section */}
+      <div className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">
+            Architecture du Système de{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Monitoring Énergétique
+            </span>
+          </h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
               <img
-                src={DISPOSTIIVE}
-                alt="SOCOMEC DIRIS A30 Device"
-                className="rounded-lg shadow-md max-w-full h-auto"
+                alt="alt o sf"
+                src={
+                  "https://res.cloudinary.com/dbhv2ff2q/image/upload/v1757880971/DIRIS%20A30/pic2_nba0yc.png"
+                }
+              />
+
+              <img
+                alt="alt o sf"
+                src="https://res.cloudinary.com/dbhv2ff2q/image/upload/v1757880971/DIRIS%20A30/pic3_pypssy.png"
               />
             </div>
           </div>
-
-          {/* Bottom row - Additional features */}
-          <div className="grid md:grid-cols-2 gap-4 mt-6">
-            <div className="bg-green-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-green-800 mb-2 flex items-center">
-                <FileText className="h-5 w-5 mr-2" />
-                Suivi et rapports
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Consultez facilement l'historique de vos consommations, comparez
-                les périodes pour repérer les tendances, identifiez rapidement
-                les anomalies et générez des rapports pour mieux comprendre et
-                optimiser vos usages énergétiques.
-              </p>
-            </div>
-
-            <div className="bg-orange-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-orange-800 mb-2 flex items-center">
-                <Zap className="h-5 w-5 mr-2" />
-                Pilotage énergétique
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Un outil d'aide à la décision pour optimiser les horaires de
-                fonctionnement, planifier la maintenance et identifier les
-                actions d'économie d'énergie à mettre en place.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Avantages pour l'entreprise */}
-        <section>
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            Avantages pour l'entreprise
-          </h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="text-center bg-gray-50 p-4 rounded-lg">
-              <TrendingDown className="h-8 w-8 mx-auto text-red-600 mb-2" />
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Maîtrise des coûts
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Réduction des dépenses énergétiques grâce à une surveillance
-                fine et la détection précoce des dérives.
-              </p>
-            </div>
-
-            <div className="text-center bg-gray-50 p-4 rounded-lg">
-              <Gauge className="h-8 w-8 mx-auto text-blue-600 mb-2" />
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Performance opérationnelle
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Amélioration continue de l'efficacité énergétique et de la
-                compétitivité industrielle.
-              </p>
-            </div>
-
-            <div className="text-center bg-gray-50 p-4 rounded-lg">
-              <Leaf className="h-8 w-8 mx-auto text-green-600 mb-2" />
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Démarche durable
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Un soutien à la stratégie RSE de TENMAR, avec une réduction de
-                l'empreinte carbone et un alignement sur les meilleures
-                pratiques internationales.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Pourquoi Eco Flux ? */}
-        <section className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-            Pourquoi Eco Flux ?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="text-center">
-              <div className="bg-white rounded-full p-3 w-16 h-16 mx-auto mb-3 shadow-md">
-                <Zap className="h-10 w-10 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Solution sur mesure
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Développée spécialement pour TENMAR, pour répondre aux besoins
-                uniques de l'entreprise et du secteur textile.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-white rounded-full p-3 w-16 h-16 mx-auto mb-3 shadow-md">
-                <Smartphone className="h-10 w-10 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Interface intuitive
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Facile à prendre en main et accessible sur tous vos appareils
-                connectés.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-white rounded-full p-3 w-16 h-16 mx-auto mb-3 shadow-md">
-                <Plug className="h-10 w-10 text-purple-600" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">
-                Intégration simple
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Se connecte facilement avec les équipements déjà en place
-                (SOCOMEC DIRIS A30)
-              </p>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
+
+      {/* Functionalities Section */}
+      <div className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Fonctionnalités
+            </span>
+          </h2>
+          <div className="max-w-6xl mx-auto">
+            {/* Tab Navigation */}
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {Object.keys(functionalityTabs).map((tabKey) => (
+                <button
+                  key={tabKey}
+                  onClick={() => setActiveTab(tabKey)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                    activeTab === tabKey
+                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300"
+                  }`}
+                >
+                  {functionalityTabs[tabKey].icon}
+                  <span className="text-sm font-medium">
+                    {functionalityTabs[tabKey].title}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content */}
+            <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
+              <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800 flex items-center justify-center gap-3">
+                {functionalityTabs[activeTab].icon}
+                {functionalityTabs[activeTab].title}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {functionalityTabs[activeTab].items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300"
+                  >
+                    <p className="text-gray-700">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };
 
-export default MeasuringSystemPage;
+export default DirisA30Page;

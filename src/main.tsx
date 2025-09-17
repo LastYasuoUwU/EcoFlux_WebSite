@@ -22,7 +22,7 @@ ReactDOM.createRoot(root).render(
   <BrowserRouter>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} localization={frFR}>
       <Routes>
-        <Route path="/" element={<AuthenticationPage />} />
+         <Route path="/" element={<AuthenticationPage />} />
         <Route element={<App />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="workshops" element={<Workshops />} />

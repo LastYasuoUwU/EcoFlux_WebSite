@@ -3,7 +3,6 @@ import DashboardPage from "./DashboardPage";
 import AboutUs from "../AboutUs";
 import MeasuringSystemPage from "../MeasuringSystem";
 import WorkshopsManagement from "../Workshops";
-import AboutCompany from "../AboutCompany";
 import { Button, Menu, MenuItem } from "@mui/material";
 
 type NavSubItem = {
