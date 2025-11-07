@@ -25,7 +25,7 @@ export const teamData: TeamData[] = [
     name: "Fadwa BOUKACHABA",
     image:
       "https://res.cloudinary.com/dbhv2ff2q/image/upload/v1747292326/just%20testing/ssjsiyqpdqjsqtosdos0.jpg",
-    role: "Ingénieur Génie Industriel",
+    role: "Ingénieure d’état Génie Industriel",
     phone: "+212 6 63 42 74 54",
     email: "fdiwaboukachaba@gmail.com",
     location: "Marrakech Maroc",

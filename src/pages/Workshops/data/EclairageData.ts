@@ -1,7 +1,7 @@
 export const eclairageData = [
   {
     Emplacement: "MMP",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -13,7 +13,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "MMP",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -25,7 +25,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "MMP",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -37,7 +37,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "MMP",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -49,7 +49,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "MMP",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -61,7 +61,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -73,7 +73,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -85,7 +85,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -97,7 +97,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -109,7 +109,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -121,7 +121,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -133,7 +133,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Coupe",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -145,7 +145,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -157,7 +157,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -169,7 +169,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -181,7 +181,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -193,7 +193,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -205,7 +205,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -217,7 +217,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -229,7 +229,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Décor",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -241,7 +241,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -253,7 +253,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -265,7 +265,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -277,7 +277,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -289,7 +289,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -301,7 +301,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -313,7 +313,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -325,7 +325,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -337,7 +337,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -349,7 +349,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -361,7 +361,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -373,7 +373,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -385,7 +385,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -397,7 +397,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -409,7 +409,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -421,7 +421,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -433,7 +433,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -445,7 +445,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -457,7 +457,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -469,7 +469,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -481,7 +481,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -493,7 +493,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -505,7 +505,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -517,7 +517,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -529,7 +529,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -541,7 +541,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -553,7 +553,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -565,7 +565,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -577,7 +577,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -589,7 +589,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -601,7 +601,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -613,7 +613,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -625,7 +625,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -637,7 +637,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -649,7 +649,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -661,7 +661,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Zone Confection",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -673,7 +673,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Service maintenance",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -685,7 +685,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Service maintenance",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -697,7 +697,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Service maintenance",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -709,7 +709,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Service maintenance",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -721,7 +721,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Service maintenance",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -733,7 +733,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Magasin produit fini",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -745,7 +745,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -757,7 +757,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -769,7 +769,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -781,7 +781,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -793,7 +793,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -805,7 +805,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -817,7 +817,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -829,7 +829,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -841,7 +841,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Administration",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -853,7 +853,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -865,7 +865,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -877,7 +877,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -889,7 +889,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -901,7 +901,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -913,7 +913,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -925,7 +925,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -937,7 +937,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -949,7 +949,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": null,
+    "puissance en W ": null,
     "Pu en Kw": 0,
     "NB H d'utilisation": null,
     "NB J d'utilisation": null,
@@ -961,7 +961,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "locaux sociaux",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -973,7 +973,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Mezzanine",
-    "puissance\n en W ": 116,
+    "puissance en W ": 116,
     "Pu en Kw": 0.116,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,
@@ -985,7 +985,7 @@ export const eclairageData = [
   },
   {
     Emplacement: "Mezzanine",
-    "puissance\n en W ": 72,
+    "puissance en W ": 72,
     "Pu en Kw": 0.072,
     "NB H d'utilisation": 10,
     "NB J d'utilisation": 273,

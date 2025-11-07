@@ -78,7 +78,6 @@ export default function MachinesDetails({
     power: item["Consommation totale en Kwh"] || item["Consommation Kwh"],
     carbonImpact: item["Impact carbone en kgCO2e"],
   }));
-  console.log(machineName !== "Repassage");
 
   return machineName !== "Repassage" ? (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">

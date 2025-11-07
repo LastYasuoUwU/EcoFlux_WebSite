@@ -10,6 +10,15 @@ import {
 import { zoneData } from "./data";
 import MachinesDetails from "./components/MachineDetails";
 
+import {
+  TextField,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
+
 const prepareChartData = () => {
   const data = [];
 
@@ -45,9 +54,26 @@ const COLORS = [
 ];
 
 export default function WorkshopsManagement() {
-  const [chartData] = useState(prepareChartData());
+  // const [chartData] = useState(prepareChartData());
   const [selectedZone, setSelectedZone] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+
+  const [chartData, setChartData] = useState(prepareChartData());
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
+  const [newZone, setNewZone] = useState<{
+    name: string;
+    PU: number;
+    consumption: number;
+    carboneImpact: number;
+    machinesData?: any[];
+  }>({
+    name: "",
+    PU: 0,
+    consumption: 0,
+    carboneImpact: 0,
+    machinesData: [],
+  });
 
   // Labels for the three metrics
   const metrics = [
@@ -140,12 +166,14 @@ export default function WorkshopsManagement() {
 
   return (
     <div className="flex flex-col items-center w-full bg-gray-50 p-6 rounded-lg">
-      {/* Combined Table */}
       <div className="w-full max-w-6xl mb-16 bg-white p-8 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6 text-blue-800">
-          Vue d'ensemble des Ateliers
-        </h2>
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+          <h2 className="text-2xl font-bold text-blue-800">
+            Vue d'ensemble des Ateliers
+          </h2>
+        </div>
 
+        {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
@@ -162,28 +190,39 @@ export default function WorkshopsManagement() {
               </tr>
             </thead>
             <tbody>
-              {getSortedData("consumption").map((item, idx) => (
-                <tr key={idx} className={idx % 2 === 0 ? "bg-gray-50" : ""}>
-                  <td className="py-2 px-4 border">{item.name}</td>
-                  <td className="py-2 px-4 border text-right">
-                    {formatNumber(item.PU)}
-                  </td>
-                  <td className="py-2 px-4 border text-right">
-                    {formatNumber(item.consumption)}
-                  </td>
-                  <td className="py-2 px-4 border text-right">
-                    {formatNumber(item.carboneImpact)}
-                  </td>
-                  <td className="py-2 px-4 border text-center">
-                    <button
-                      onClick={() => handleViewDetails(item)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm"
-                    >
-                      Détails
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {/*
+                Use chartData (the state with setter) filtered by searchQuery.
+                The code below expects `chartData` and `setChartData` to be defined at component top as instructed.
+              */}
+              {chartData
+                .filter((z) =>
+                  z.name
+                    .toLowerCase()
+                    .includes(searchQuery.trim().toLowerCase())
+                )
+                .sort((a, b) => b.consumption - a.consumption)
+                .map((item, idx) => (
+                  <tr key={idx} className={idx % 2 === 0 ? "bg-gray-50" : ""}>
+                    <td className="py-2 px-4 border">{item.name}</td>
+                    <td className="py-2 px-4 border text-right">
+                      {formatNumber(item.PU)}
+                    </td>
+                    <td className="py-2 px-4 border text-right">
+                      {formatNumber(item.consumption)}
+                    </td>
+                    <td className="py-2 px-4 border text-right">
+                      {formatNumber(item.carboneImpact)}
+                    </td>
+                    <td className="py-2 px-4 border text-center">
+                      <button
+                        onClick={() => handleViewDetails(item)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm"
+                      >
+                        Détails
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
             <tfoot>
               <tr className="bg-gray-200 font-bold">
@@ -202,6 +241,89 @@ export default function WorkshopsManagement() {
             </tfoot>
           </table>
         </div>
+
+        {/* Add Zone Dialog (Material UI) */}
+        <Dialog
+          open={openAddDialog}
+          onClose={() => setOpenAddDialog(false)}
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogTitle>Ajouter un Atelier</DialogTitle>
+          <DialogContent className="space-y-4 flex flex-col gap-4">
+            <TextField
+              label="Nom de la zone"
+              fullWidth
+              value={newZone.name}
+              onChange={(e) => setNewZone({ ...newZone, name: e.target.value })}
+            />
+            <TextField
+              label="Puissance en kW"
+              type="number"
+              fullWidth
+              value={newZone.PU}
+              onChange={(e) =>
+                setNewZone({ ...newZone, PU: Number(e.target.value) })
+              }
+            />
+            <TextField
+              label="Consommation en kWh"
+              type="number"
+              fullWidth
+              value={newZone.consumption}
+              onChange={(e) =>
+                setNewZone({ ...newZone, consumption: Number(e.target.value) })
+              }
+            />
+            <TextField
+              label="Impact carbone en kgCO2e"
+              type="number"
+              fullWidth
+              value={newZone.carboneImpact}
+              onChange={(e) =>
+                setNewZone({
+                  ...newZone,
+                  carboneImpact: Number(e.target.value),
+                })
+              }
+            />
+            {/* If you want to add machines data you can add a textarea or a custom UI here. */}
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={() => setOpenAddDialog(false)}>Annuler</Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                // Basic validation
+                if (!newZone.name.trim()) return;
+
+                const itemToAdd = {
+                  name: newZone.name.trim(),
+                  PU: Number(newZone.PU) || 0,
+                  consumption: Number(newZone.consumption) || 0,
+                  carboneImpact: Number(newZone.carboneImpact) || 0,
+                  machinesData: newZone.machinesData || [],
+                };
+
+                // update chartData state (replace earlier chartData declaration with setter as instructed)
+                setChartData((prev) => [...prev, itemToAdd]);
+
+                // reset form and close dialog
+                setNewZone({
+                  name: "",
+                  PU: 0,
+                  consumption: 0,
+                  carboneImpact: 0,
+                  machinesData: [],
+                });
+                setOpenAddDialog(false);
+              }}
+            >
+              Ajouter
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
 
       {/* Three charts below the table */}

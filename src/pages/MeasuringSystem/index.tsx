@@ -149,11 +149,6 @@ const DirisA30Page = () => {
               logiciels spécialisés, l'analyse et l'exploitation des
               informations peuvent se faire en toute simplicité.
             </p>
-            <div className="flex justify-center">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Découvrir les fonctionnalités
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -350,7 +345,6 @@ const DirisA30Page = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
