@@ -21,12 +21,11 @@
     "noUncheckedSideEffectImports": true,
 
     // ... your other compiler options
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
     },
     "esModuleInterop": true
   },

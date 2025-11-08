@@ -18,6 +18,7 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
+import EnergyStatsDashboard from "./components/WorkshopeOverview";
 
 const prepareChartData = () => {
   const data = [];
@@ -167,13 +168,12 @@ export default function WorkshopsManagement() {
   return (
     <div className="flex flex-col items-center w-full bg-gray-50 p-6 rounded-lg">
       <div className="w-full max-w-6xl mb-16 bg-white p-8 rounded-xl shadow-md">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+        {/* <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
           <h2 className="text-2xl font-bold text-blue-800">
             Vue d'ensemble des Ateliers
           </h2>
         </div>
 
-        {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
@@ -190,10 +190,6 @@ export default function WorkshopsManagement() {
               </tr>
             </thead>
             <tbody>
-              {/*
-                Use chartData (the state with setter) filtered by searchQuery.
-                The code below expects `chartData` and `setChartData` to be defined at component top as instructed.
-              */}
               {chartData
                 .filter((z) =>
                   z.name
@@ -240,9 +236,9 @@ export default function WorkshopsManagement() {
               </tr>
             </tfoot>
           </table>
-        </div>
+        </div> */}
+        <EnergyStatsDashboard/>
 
-        {/* Add Zone Dialog (Material UI) */}
         <Dialog
           open={openAddDialog}
           onClose={() => setOpenAddDialog(false)}
