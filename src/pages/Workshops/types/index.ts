@@ -9,8 +9,14 @@ export const machinesNames: Record<string, string> = {
   repassage: "Repassage",
 };
 
+export interface totalViewWorkshops {
+  puissance: number;
+  consommation: number;
+  impact: number;
+}
+
 export type Machine = {
-  name: string;
+  machine: string;
   sum_pu_kw: number;
   sum_consumption: number;
   sum_impact_carbone: number;

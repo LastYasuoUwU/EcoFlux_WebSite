@@ -60,7 +60,6 @@ export default function WorkshopsManagement() {
   const [showPopup, setShowPopup] = useState(false);
 
   const [chartData, setChartData] = useState(prepareChartData());
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
   const [newZone, setNewZone] = useState<{
     name: string;
@@ -168,76 +167,7 @@ export default function WorkshopsManagement() {
   return (
     <div className="flex flex-col items-center w-full bg-gray-50 p-6 rounded-lg">
       <div className="w-full max-w-6xl mb-16 bg-white p-8 rounded-xl shadow-md">
-        {/* <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-          <h2 className="text-2xl font-bold text-blue-800">
-            Vue d'ensemble des Ateliers
-          </h2>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="py-2 px-4 border text-left">Zone</th>
-                <th className="py-2 px-4 border text-right">Puissance en kW</th>
-                <th className="py-2 px-4 border text-right">
-                  Consommation en kWh
-                </th>
-                <th className="py-2 px-4 border text-right">
-                  Impact carbone en kgCO2e
-                </th>
-                <th className="py-2 px-4 border text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {chartData
-                .filter((z) =>
-                  z.name
-                    .toLowerCase()
-                    .includes(searchQuery.trim().toLowerCase())
-                )
-                .sort((a, b) => b.consumption - a.consumption)
-                .map((item, idx) => (
-                  <tr key={idx} className={idx % 2 === 0 ? "bg-gray-50" : ""}>
-                    <td className="py-2 px-4 border">{item.name}</td>
-                    <td className="py-2 px-4 border text-right">
-                      {formatNumber(item.PU)}
-                    </td>
-                    <td className="py-2 px-4 border text-right">
-                      {formatNumber(item.consumption)}
-                    </td>
-                    <td className="py-2 px-4 border text-right">
-                      {formatNumber(item.carboneImpact)}
-                    </td>
-                    <td className="py-2 px-4 border text-center">
-                      <button
-                        onClick={() => handleViewDetails(item)}
-                        className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-sm"
-                      >
-                        Détails
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-            <tfoot>
-              <tr className="bg-gray-200 font-bold">
-                <td className="py-2 px-4 border">Total</td>
-                <td className="py-2 px-4 border text-right">
-                  {formatNumber(calculateTotal("PU"))}
-                </td>
-                <td className="py-2 px-4 border text-right">
-                  {formatNumber(calculateTotal("consumption"))}
-                </td>
-                <td className="py-2 px-4 border text-right">
-                  {formatNumber(calculateTotal("carboneImpact"))}
-                </td>
-                <td className="py-2 px-4 border"></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div> */}
-        <EnergyStatsDashboard/>
+        <EnergyStatsDashboard />
 
         <Dialog
           open={openAddDialog}
